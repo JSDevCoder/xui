@@ -107,7 +107,7 @@ class Request {
 				return res.data;
 			}else{
 				// 处理异常状态
-				this.status_handle();
+				this.status_handle(res.statusCode);
 			}
 		}else if(error){
 			this.log(api, data, error)

@@ -1,2 +1,2 @@
-# xui
-为uniapp开发的一套ui
+﻿# xui
+基于uniapp的基础应用架构
