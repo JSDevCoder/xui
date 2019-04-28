@@ -1,0 +1,48 @@
+.x-input.data-v-dce10b98 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+.x-input .label.data-v-dce10b98 {
+  width: 128rpx;
+  min-width: 128rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 32rpx;
+  font-size: 32rpx;
+}
+.x-input .block.data-v-dce10b98 {
+  width: 558rpx;
+  position: relative;
+}
+.x-input .block .input.data-v-dce10b98 {
+  width: 518rpx;
+  height: 80rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+.x-input .block .clear.data-v-dce10b98 {
+  width: 40rpx;
+  height: 40rpx;
+  color: #808080;
+  font-size: 36rpx;
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+  z-index: 999;
+}
+.x-input .block .placeholder.data-v-dce10b98 {
+  color: #808080;
+}
+

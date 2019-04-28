@@ -16,14 +16,12 @@
 			}
 		},
 		onLoad() {
-			this.get_demo_list();
-		},
-		methods: {
-			// 调用service示例
-			get_demo_list() {
-				index.index_list().then(res => {
-					// 处理业务逻辑
+			const token = uni.getStorageSync('token');
+			if(!token){
+				uni.redirectTo({
+					url: '/pages/login/login'
 				});
+				return;
 			}
 		}
 	}
