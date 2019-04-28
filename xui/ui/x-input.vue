@@ -2,8 +2,9 @@
 	<view class="x-input">
 		<view class="label x-single-line">{{label}}</view>
 		<view class="block">
-			<input class="input" :type="text" @input="get_value" placeholder-class="placeholder" :placeholder="'请输入' + label" :value="value">
-			<view class="clear iconfont icon-qingkong" v-if="value.length" @tap="clear"></view>
+			<input class="input" :type="type" :password="pwd && is_show_pwd" @input="get_value" placeholder-class="placeholder" :placeholder="'请输入' + label" :value="value">
+			<view class="clear iconfont icon-qingkong" :style="{right: pwd ? '26px' : 0}" v-if="value.length" @tap="clear"></view>
+			<view :class="'show iconfont icon-mimaxianshi' + (is_show_pwd ? '' : '1')" v-if="pwd && value.length" @tap="show_pwd"></view>
 		</view>
 	</view>
 </template>
@@ -17,7 +18,8 @@
 	export default {
 		data() {
 			return {
-				value: ''
+				value: '',
+				is_show_pwd: true
 			};
 		},
 		
@@ -30,6 +32,11 @@
 			type: {
 				type: String,
 				default: 'text'
+			},
+			
+			pwd: {
+				type: Boolean,
+				default: false
 			}
 		},
 		
@@ -41,6 +48,14 @@
 			
 			clear() {
 				this.value = '';
+			},
+			
+			show_pwd() {
+				if(this.is_show_pwd){
+					this.is_show_pwd = false;
+				}else{
+					this.is_show_pwd = true;
+				}
 			}
 		}
 	}
@@ -72,8 +87,20 @@
 		.clear{
 			width:40upx;
 			height:40upx;
-			color:#808080;
+			color:#c4c4c4;
 			font-size:36upx;
+			text-align:right;
+			position: absolute;
+			right:0;
+			top:20upx;
+			z-index:999;
+		}
+		.show{
+			width:40upx;
+			height:40upx;
+			color:#c4c4c4;
+			font-size:36upx;
+			text-align:right;
 			position: absolute;
 			right:0;
 			top:20upx;
