@@ -1,1 +1,0 @@
-<view bind:__l="__l"><x-input label="用户名" data-event-opts="{{[['^get_value',[['get_value']]]]}}" bind:get_value="__e"></x-input></view>
