@@ -2,7 +2,7 @@
 	<view class="x-input">
 		<view class="label x-single-line">{{label}}</view>
 		<view class="block">
-			<input class="input" :type="type" :password="pwd && is_show_pwd" @input="get_value" placeholder-class="placeholder" :placeholder="'请输入' + label" :value="value">
+			<input class="ipt" :type="type" :password="pwd && is_show_pwd" :data-name="label" @input="get_value" :placeholder-style="'color:' + placeholder" :placeholder="'请输入' + label" :value="value">
 			<view class="clear iconfont icon-qingkong" :style="{right: pwd ? '26px' : 0}" v-if="value.length" @tap="clear"></view>
 			<view :class="'show iconfont icon-mimaxianshi' + (is_show_pwd ? '' : '1')" v-if="pwd && value.length" @tap="show_pwd"></view>
 		</view>
@@ -37,13 +37,19 @@
 			pwd: {
 				type: Boolean,
 				default: false
+			},
+			
+			placeholder: {
+				type: String,
+				default: '#808080'
 			}
 		},
 		
 		methods: {
 			get_value(e) {
+				let name = e.currentTarget.dataset.name;
 				this.value = e.detail.value;
-				this.$emit('get_value', e.detail.value);
+				this.$emit('get_value', {value: e.detail.value, name});
 			},
 			
 			clear() {
@@ -67,6 +73,7 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	border-bottom:1upx solid #f2f2f2;
+	background-color:#fff;
 	.label{
 		width:128upx;
 		min-width:128upx;
@@ -78,7 +85,7 @@
 	.block{
 		width:558upx;
 		position:relative;
-		.input{
+		.ipt{
 			width:518upx;
 			height:80upx;
 			padding:0 20upx;

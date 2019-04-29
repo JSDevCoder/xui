@@ -1,5 +1,5 @@
 <template>
-	<view class="x-button" :class="style">{{label}}</view>
+	<view class="x-button" :class="style" @tap="submit">{{label}}</view>
 </template>
 
 <script>
@@ -25,6 +25,12 @@
 				let cls = 'x-button-' + this.type;
 				return [cls];
 			}
+		},
+		
+		methods: {
+			submit() {
+				this.$emit('submit');
+			}
 		}
 	}
 </script>
@@ -45,8 +51,8 @@
 		color:#333;
 	}
 	.x-button-info{
-		background-color:#3385aa;
-		border:1upx solid #3385aa;
+		background-color:#3385ff;
+		border:1upx solid #3385ff;
 		color:#fff;
 	}
 </style>
