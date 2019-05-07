@@ -3,7 +3,7 @@
 		<view class="tab-head flex">
 			<view
 				class="tab-head-item"
-				:class="(idx == index ? 'bg' : '')"
+				:class="idx == index ? 'bg' : ''"
 				:style="{ width: width + '%' }"
 				v-for="(item, index) of tab"
 				:key="index"
@@ -13,9 +13,7 @@
 				{{ item }}
 			</view>
 		</view>
-		<view class="tab-content">
-			<slot name="content"></slot>
-		</view>
+		<view class="tab-content"><slot name="content"></slot></view>
 	</view>
 </template>
 
@@ -31,7 +29,7 @@ export default {
 			idx: 0
 		};
 	},
-	
+
 	props: {
 		tab: {
 			type: Array,
@@ -50,7 +48,7 @@ export default {
 			default: 50
 		}
 	},
-	
+
 	methods: {
 		active_item(e) {
 			let index = e.currentTarget.dataset.index;

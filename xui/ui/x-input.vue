@@ -53,18 +53,18 @@ export default {
 			type: String,
 			default: '#808080'
 		},
-		
+
 		forbidden: {
 			type: Boolean,
 			default: false
 		},
-		
+
 		valueData: {
 			type: String,
 			default: ''
 		}
 	},
-	
+
 	watch: {
 		valueData(val) {
 			this.valueData = val;
@@ -110,7 +110,7 @@ export default {
 	}
 	.block {
 		width: 558upx;
-		line-height:80upx;
+		line-height: 80upx;
 		position: relative;
 		.ipt {
 			width: 518upx;

@@ -9,10 +9,10 @@ import Request from '../request/Request.js'
 class Index extends Request {
 	constructor(arg) {
 		super();
-	    // 逻辑接口示例
+		// 逻辑接口示例
 		this.list = '';
 	}
-	
+
 	/**
 	 * 接口请求示例
 	 */

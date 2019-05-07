@@ -7,7 +7,7 @@
  */
 class Common {
 	constructor(arg) {
-	    
+
 	}
 }
 

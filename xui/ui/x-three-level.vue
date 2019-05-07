@@ -79,19 +79,17 @@ export default {
 			let index = Number(e.currentTarget.dataset.index);
 			let type = Number(e.currentTarget.dataset.type);
 			let name = e.currentTarget.dataset.name;
-			
-			switch(type) {
+
+			switch (type) {
 				case 1:
 					this.$set(this.list_idx, type - 1, index);
-					this.$set(this.items, type - 1, name)
+					this.$set(this.items, type - 1, name);
 					break;
-				
+
 				case 2:
-					
 					break;
-					
+
 				case 3:
-					
 					break;
 			}
 		},

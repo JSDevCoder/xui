@@ -3,18 +3,29 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleText": "首页"
+				}
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"app-plus": {
+					"titleText": "登录"
+				}
 			}
 		}
-	    ,{
-            "path" : "pages/login/login",
-            "style" : {}
-        }
-    ],
+	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"bounce": true,
+		"scrollIndicator": "true",
+		"animationType": "pop-in",
+		"animationDuration": 400,
+		"navigationBarBackgroundColor": "#3385ff",
+		"titleNView": {
+			"titleColor": "#fff",
+			"titleSize": "16px"
+		}
 	}
 }

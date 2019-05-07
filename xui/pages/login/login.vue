@@ -7,40 +7,39 @@
 </template>
 
 <script>
-	import xInput from '../../ui/x-input.vue'
-	import xButton from '../../ui/x-button.vue'
-	export default {
-		data() {
-			return {
-				user_value: '',
-				pwd_value: '',
-				pwd: true
-			};
+import xInput from '../../ui/x-input.vue';
+import xButton from '../../ui/x-button.vue';
+export default {
+	data() {
+		return {
+			user_value: '',
+			pwd_value: '',
+			pwd: true
+		};
+	},
+
+	components: {
+		xInput,
+		xButton
+	},
+
+	methods: {
+		get_user_value(value) {
+			console.log(value);
+			this.user_value = value;
 		},
-		
-		components: {
-			xInput,
-			xButton
+
+		get_pwd_value(value) {
+			this.pwd_value = value;
 		},
-		
-		methods: {
-			get_user_value(value) {
-				console.log(value)
-				this.user_value = value;
-			},
-			
-			get_pwd_value(value) {
-				this.pwd_value = value;
-			},
-			
-			submit() {
-				console.log(123)
-				console.log(this.user_value)
-				console.log(this.pwd_value)
-			}
+
+		submit() {
+			console.log(123);
+			console.log(this.user_value);
+			console.log(this.pwd_value);
 		}
 	}
+};
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

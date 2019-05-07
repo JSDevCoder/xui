@@ -7,40 +7,17 @@
 				<!-- 
 				* 选择小区
 				*  -->
-				<x-picker 
-					label="区域范围" 
-					type="selector" 
-					:range-data="area"
-					range-key="villageName"
-					item-type="selector"
-					style-type="column"
-					@get_value="get_value"
-				>
-				</x-picker>
-				
+				<x-picker label="区域范围" type="selector" :range-data="area" range-key="villageName" item-type="selector" style-type="column" @get_value="get_value"></x-picker>
+
 				<!-- 
 				* 选择开始日期
 				*  -->
-				<x-picker 
-					label="开始日期" 
-					type="date"
-					style-type="column"
-					item-type="begin_date"
-					@get_value="get_value"
-				>
-				</x-picker>
-				
+				<x-picker label="开始日期" type="date" style-type="column" item-type="begin_date" @get_value="get_value"></x-picker>
+
 				<!-- 
 				* 选择结束日期
 				*  -->
-				<x-picker 
-					label="结束日期" 
-					type="date"
-					item-type="end_date"
-					style-type="column"
-					@get_value="get_value"
-				>
-				</x-picker>
+				<x-picker label="结束日期" type="date" item-type="end_date" style-type="column" @get_value="get_value"></x-picker>
 				<view class="input input-default" @tap="confirm">确定</view>
 			</view>
 		</view>
@@ -98,10 +75,10 @@ export default {
 		/**
 		 * 禁止滑动
 		 */
-		move(){
-			console.log('打开弹层时，禁止滑动')
+		move() {
+			console.log('打开弹层时，禁止滑动');
 		},
-		
+
 		/**
 		 * 开启弹层
 		 */

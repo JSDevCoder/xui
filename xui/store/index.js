@@ -5,7 +5,7 @@ export default new Vuex.Strore({
 	store: {
 		has_login: false
 	},
-	
+
 	mutations: {
 		/**
 		 * 更改登录状态

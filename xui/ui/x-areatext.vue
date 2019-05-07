@@ -1,6 +1,6 @@
 <template>
 	<view class="x-areatext">
-		<view class="label">{{label}}</view>
+		<view class="label">{{ label }}</view>
 		<view class="block">
 			<textarea class="textarea" :value="value" :data-name="label" @input="set_value" :placeholder-style="'color:' + placeholder" :placeholder="'请输入' + label" />
 		</view>
@@ -8,54 +8,59 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				value: ''
-			};
+/**
+ * textarea组件
+ * @dev 何鑫适
+ * @email mnkv@163.com
+ */
+export default {
+	data() {
+		return {
+			value: ''
+		};
+	},
+
+	props: {
+		label: {
+			type: String,
+			default: ''
 		},
-		
-		props: {
-			label: {
-				type: String,
-				default: ''
-			},
-			
-			itemType: {
-				type: String,
-				default: ''
-			},
-			
-			placeholder: {
-				type: String,
-				default: '#808080'
-			}
+
+		itemType: {
+			type: String,
+			default: ''
 		},
-		
-		methods: {
-			set_value(e) {
-				this.value = e.detail.value;
-				this.$emit('get_value', {value: e.detail.value, type: this.itemType});
-			}
+
+		placeholder: {
+			type: String,
+			default: '#808080'
+		}
+	},
+
+	methods: {
+		set_value(e) {
+			this.value = e.detail.value;
+			this.$emit('get_value', { value: e.detail.value, type: this.itemType });
 		}
 	}
+};
 </script>
 
 <style lang="less" scoped>
-.x-areatext{
+.x-areatext {
 	border-bottom: 1upx solid #f2f2f2;
-	background-color:#fff;
-	.label{
-		height:80upx;
-		line-height:80upx;
-		padding:0 32upx;
-		font-size:32upx;
+	background-color: #fff;
+	.label {
+		height: 80upx;
+		line-height: 80upx;
+		padding: 0 32upx;
+		font-size: 32upx;
 	}
-	.textarea{
-		width:inherit;
-		height:200upx;
-		padding:0 32upx;
-		font-size:28upx;
+	.textarea {
+		width: inherit;
+		height: 200upx;
+		padding: 0 32upx;
+		font-size: 28upx;
 	}
 }
 </style>
