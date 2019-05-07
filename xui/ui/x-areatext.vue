@@ -21,6 +21,11 @@
 				default: ''
 			},
 			
+			itemType: {
+				type: String,
+				default: ''
+			},
+			
 			placeholder: {
 				type: String,
 				default: '#808080'
@@ -29,9 +34,8 @@
 		
 		methods: {
 			set_value(e) {
-				let name = e.currentTarget.dataset.name;
 				this.value = e.detail.value;
-				this.$emit('get_value', {value: e.detail.value, name});
+				this.$emit('get_value', {value: e.detail.value, type: this.itemType});
 			}
 		}
 	}
