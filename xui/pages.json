@@ -5,14 +5,18 @@
 			"style": {
 				"enablePullDownRefresh": true,
 				"app-plus": {
-					"titleText": "首页"
+					"titleNView": {
+						"titleText": "首页"
+					}
 				}
 			}
 		}, {
 			"path": "pages/login/login",
 			"style": {
 				"app-plus": {
-					"titleText": "登录"
+					"titleNView": {
+						"titleText": "登录"
+					}
 				}
 			}
 		}

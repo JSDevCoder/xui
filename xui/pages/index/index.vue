@@ -18,7 +18,7 @@ export default {
 	onLoad() {
 		const token = uni.getStorageSync('token');
 		if (!token) {
-			uni.redirectTo({
+			uni.navigateTo({
 				url: '/pages/login/login'
 			});
 			return;
