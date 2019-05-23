@@ -93,11 +93,11 @@ class Request {
 	/**
 	 * ajax请求，默认POST请求方式
 	 */
-	async ajax({
+	async ajax(
 		api,
 		data = {},
 		method = 'POST'
-	}) {
+	) {
 		if (!this.api(api)) return;
 		const options = {};
 		options.url = this.api(api);
