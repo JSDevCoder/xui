@@ -16,8 +16,11 @@ class Index extends Request {
 	/**
 	 * 接口请求示例
 	 */
-	index_list() {
-		return super.ajax(this.list);
+	index_list({
+		args1,
+		args2
+	}) {
+		return super.ajax(this.list, ...arguments);
 	}
 }
 
