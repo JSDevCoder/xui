@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		login
+		
 	</view>
 </template>
 

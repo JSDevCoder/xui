@@ -6,7 +6,9 @@
 				"enablePullDownRefresh": true,
 				"app-plus": {
 					"titleNView": {
-						"titleText": "首页"
+						"titleText": "考试管理系统",
+						"titleColor": "#fff",
+						"titleSize": "16px"
 					}
 				}
 			}
@@ -14,22 +16,64 @@
 			"path": "pages/login/login",
 			"style": {
 				"app-plus": {
+					"animationType": "zoom-fade-out",
+					"animationDuration": 300,
 					"titleNView": {
-						"titleText": "登录"
+						"titleText": "用户登录",
+						"titleColor": "#fff",
+						"titleSize": "16px"
+
+					}
+				}
+			}
+		}, {
+			"path": "pages/examination/examination",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {},
+						"buttons": [{
+							"type": "favorite"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"titleText": "个人中心",
+						"titleColor": "#fff",
+						"titleSize": "16px"
 					}
 				}
 			}
 		}
 	],
 	"globalStyle": {
-		"bounce": true,
-		"scrollIndicator": "true",
-		"animationType": "pop-in",
-		"animationDuration": 400,
-		"navigationBarBackgroundColor": "#3385ff",
-		"titleNView": {
-			"titleColor": "#fff",
-			"titleSize": "16px"
-		}
+		"navigationBarBackgroundColor": "#2b9939"
+	},
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#2b9939",
+		"backgroundColor": "#fff",
+		"borderStyle": "black",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "学习",
+			"iconPath": "static/logo.png",
+			"selectedIconPath": "static/logo.png"
+		}, {
+			"pagePath": "pages/examination/examination",
+			"text": "考试",
+			"iconPath": "static/logo.png",
+			"selectedIconPath": "static/logo.png"
+		}, {
+			"pagePath": "pages/mine/mine",
+			"text": "我的",
+			"iconPath": "static/logo.png",
+			"selectedIconPath": "static/logo.png"
+		}]
 	}
 }

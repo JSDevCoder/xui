@@ -1,17 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import users from './modules/users.js'
 
-export default new Vuex.Strore({
-	store: {
-		has_login: false
-	},
+Vue.use(Vuex);
 
-	mutations: {
-		/**
-		 * 更改登录状态
-		 */
-		login() {
-			state.has_login = true;
-		}
+export default new Vuex.Store({
+	modules: {
+		users
 	}
 });

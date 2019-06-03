@@ -1,26 +1,27 @@
-import Request from '../request/Request.js'
-
 /**
  * Index模块业务逻辑处理
  * @dev 何鑫适
  * @email mnkv@163.com
- * @github 
  */
+import Request from '../request/Request.js'
+import indexMock from './IndexMock.js'
+
 class Index extends Request {
 	constructor(arg) {
 		super();
+
 		// 逻辑接口示例
-		this.list = '';
+		this.list = '/tmVillage/qryAllVillage';
 	}
 
 	/**
 	 * 接口请求示例
 	 */
-	index_list({
-		args1,
-		args2
-	}) {
-		return super.ajax(this.list, ...arguments);
+	indexList() {
+		if(this.hasMock){
+			indexMock.list();
+		}
+		return super.ajax(this.list);
 	}
 }
 

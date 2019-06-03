@@ -1,46 +1,84 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{ title }}</text>
-		</view>
+	<view class="container">
+		<view @tap="showAlert">点击我显示alert</view>
+		<alert ref="alert" @confirm="confirm">123</alert>
 	</view>
 </template>
 
 <script>
-import index from '../../service/Index.js';
-export default {
-	data() {
-		return {
-			title: 'Hello'
-		};
-	},
-	onLoad() {
-		const token = uni.getStorageSync('token');
-		if (!token) {
-			uni.navigateTo({
-				url: '/pages/login/login'
-			});
-			return;
+	
+	import { mapMutations } from 'vuex'
+	import index from '../../service/Index.js'
+	export default {
+		data() {
+			return {
+				ajaxStop: false,
+				ajaxCount: 0
+			}
+		},
+
+		components: {
+			
+		},
+
+		onLoad() {
+			this.indexList();
+			
+// 			let token = uni.getStorageSync('token');
+// 
+// 			if (token) {
+// 				// 保持登录状态
+// 				this.toLogin();
+// 
+// 				// 其他业务逻辑
+// 
+// 			} else {
+// 				// uni.redirectTo({
+// 				// 	url: '/pages/login/login'
+// 				// });
+// 			}
+		},
+
+		methods: {
+			...mapMutations('users', ['toLogin']),
+			
+			showAlert() {
+				this.$refs.alert.open();
+			},
+			
+			confirm() {
+				this.$refs.alert.close();
+			},
+			
+			indexList(){
+				index.indexList().then(res => {
+					this.ajaxCountComputed();
+				});
+			},
+			
+			ajaxCountComputed() {
+				const COUNT = 1;
+				this.ajaxCount += 1;
+				if(this.ajaxCount == COUNT){
+					this.ajaxStop = true;
+					console.log(this.ajaxCount)
+				}
+			},
+
+			onTap(index) {
+				console.log(index)
+				this.activeIndex = index;
+			},
+
+			onChange(e) {
+				let index = e.detail.current;
+				console.log(index)
+				this.currentIndex = index;
+			}
 		}
 	}
-};
 </script>
 
-<style>
-.content {
-	text-align: center;
-	height: 400upx;
-}
+<style lang="less" scoped>
 
-.logo {
-	height: 200upx;
-	width: 200upx;
-	margin-top: 200upx;
-}
-
-.title {
-	font-size: 36upx;
-	color: #8f8f94;
-}
 </style>

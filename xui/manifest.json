@@ -1,7 +1,7 @@
 {
-    "name" : "xui",
-    "appid" : "",
-    "description" : "",
+    "name" : "考试",
+    "appid" : "__UNI__2958487",
+    "description" : "在线考试",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
@@ -10,7 +10,7 @@
         "usingComponents" : true,
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
-            "waiting" : true,
+            "waiting" : false,
             "autoclose" : true,
             "delay" : 0
         },

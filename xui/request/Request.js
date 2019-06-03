@@ -4,10 +4,15 @@
  * @email mnkv@163.com
  * @github 
  */
+
+
 class Request {
 	constructor(arg) {
 		// 调试模式开关
 		this.debug = true;
+
+		// 是否开启mock
+		this.hasMock = false;
 	}
 
 	/**
@@ -17,8 +22,8 @@ class Request {
 		if (this.debug) {
 			console.log('===LOG Begin=====================================================================');
 			console.log('请求接口: ' + this.api(api));
-			console.log('请求参数: ' + JSON.stringify(data));
-			console.log('返回数据: ' + JSON.stringify(res));
+			console.log(data);
+			console.log(res);
 			console.log('===LOG End=====================================================================');
 		}
 	}
@@ -30,7 +35,7 @@ class Request {
 	 */
 	server() {
 		const dev = {
-			BASE_URL: '',
+			BASE_URL: 'http://192.168.108.121:9010',
 		}
 
 		const prod = {
