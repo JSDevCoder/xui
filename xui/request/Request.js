@@ -1,127 +1,166 @@
 /**
- * ajax请求封装库
- * @dev 何鑫适
- * @email mnkv@163.com
- * @github 
+ * 封装uni.request
+ * @author hexinshi
+ * @email hexinshi@ebring.com.cn
  */
-
-
-class Request {
-	constructor(arg) {
-		// 调试模式开关
-		this.debug = true;
-
-		// 是否开启mock
-		this.hasMock = false;
+export default class Request {
+	constructor() {
+		// 当前开发环境
+		this.mode = 'dev';
+		
+		// 当前请求对象
+		this.task = null;
+		
+		// 默认配置
+		this.options = {
+			url: '',
+			data: {},
+			method: 'POST',
+			header: {},
+			dataType: 'json',
+			responseType: 'text'
+		};
 	}
-
+	
 	/**
-	 * LOG日志
+	 * 获取当前环境服务器地址
 	 */
-	log(api, data, res) {
-		if (this.debug) {
-			console.log('===LOG Begin=====================================================================');
-			console.log('请求接口: ' + this.api(api));
-			console.log(data);
-			console.log(res);
-			console.log('===LOG End=====================================================================');
-		}
-	}
-
-	/**
-	 * 项目环境
-	 * @dev 开发环境
-	 * @prod 生产环境
-	 */
-	server() {
+	getRequestURL() {
 		const dev = {
-			BASE_URL: 'http://192.168.108.121:9010',
-		}
-
-		const prod = {
-			BASE_URL: '',
-		}
-
-		return this.debug ? dev : prod;
+			baseUrl: 'http://192.168.118.115/tp5',
+			resUrl: 'http://192.168.108.115/'
+		};
+		
+		const test = {
+			baseUrl: '',
+			resUrl: ''
+		};
+		
+		const production = {
+			baseUrl: '',
+			resUrl: ''
+		};
+		
+		return this.mode == 'prod' ? production : 
+				this.mode == 'test' ? test : dev;
 	}
-
+	
 	/**
-	 * 处理api
+	 * 获取完整的请求地址
+	 * @param {Object} api
 	 */
-	api(api) {
-		if (!api) {
-			console.error('api接口不存在');
-			return false;
-		}
-		return this.server().BASE_URL + api;
+	getApi(api) {
+		return this.getRequestURL().baseUrl + api;
 	}
-
+	
 	/**
-	 * 处理headers
+	 * 处理用户传递的参数
+	 * @param {Object} data
 	 */
-	headers() {
-		const headers = {};
+	getData(data) {
+		//对data做一些公共操作
+		return data;
+	}
+	
+	/**
+	 * 处理ajax请求中的header头
+	 * @param {Object} options
+	 */
+	getHeader(options) {
 		const token = uni.getStorageSync('token');
-		if (token) {
-			headers['token'] = token;
+		if(token) options['token'] = token;
+		if(typeof options.type === 'undefined'){
+			options['Content-type'] = 'application/x-www-form-urlencoded';
+		}else if(options.type === 'json'){
+			options['Content-Type'] = 'application/json';
 		}
-		headers['Content-Type'] = 'application/json';
-		// headers['Content-type'] = 'application/x-www-form-urlencoded'
-
-		return headers;
+		return options;
 	}
-
+	
 	/**
-	 * 请求异常状态处理
-	 */
-	status_handle(code, from, msg) {
-		let info = '';
-		switch (code) {
-			case '500':
-				info = '服务器出错，请求失败';
-				break;
-			case '404':
-				info = '资源或者接口不存在， 请求失败'
-				break;
-			case '-1': //业务异常状态
-				info = msg;
-				console.error(from + '___' + msg);
-				break;
-		}
-		uni.showToast({
-			title: info,
-			icon: 'none',
-			duration: 2000
-		});
-	}
-
-	/**
-	 * ajax请求，默认POST请求方式
+	 * ajax请求简单封装
 	 */
 	async ajax(
-		api,
+		api = '', 
 		data = {},
-		method = 'POST'
+		{
+			method = 'POST', 
+			header = {}, 
+			dataType = 'json', 
+			responseType = 'text'
+		} = {}
 	) {
-		if (!this.api(api)) return;
-		const options = {};
-		options.url = this.api(api);
-		options.data = data;
-		options.method = method;
-		options.headers = this.headers();
-		let [error, res] = await uni.request(options)
-		if (res) {
-			this.log(api, data, res);
-			if (res.statusCode == 200) {
-				return res.data;
-			} else {
-				// 处理异常状态
-				this.status_handle(res.statusCode);
-			}
-		} else if (error) {
-			this.log(api, data, error)
+		if(!api) throw new Error('ajax请求缺少参数\'api\'');
+		uni.showLoading({title: 'loading...'});
+		const options = {
+			url: this.getApi(api),
+			data: this.getData(data),
+			method,
+			header: this.getHeader(header),
+			dataType,
+			responseType
+		}
+		const [error, res]  = await uni.request(options);
+		uni.hideLoading();
+		if(error.errMsg === 'request:fail timeout'){
+			this.log(options.url, options.data, error);
+			uni.showToast({
+				title: '请求超时',
+				icon: 'none',
+				duration: 2000,
+				position: 'bottom'
+			});
+			return;
+		}
+		this.log(options.url, options.data, res);
+		if(res && res.status === 200){
+			return res.data;
+		}else{
+			this.statusHandle(res.status);
 		}
 	}
+	
+	/**
+	 * 服务器请求状态处理
+	 * @param {Object} statusCode 状态码
+	 * @param {Object} msg 提示信息
+	 */
+	statusHandle(statusCode, msg) {
+		const status = [500, 404, -403];
+		const msg_text = [
+			'请求失败，服务器内部错误',
+			'请求失败，API接口不存在',
+			'当前登录已失效，请重新登录'
+		];
+		const pos = status.indexOf(statusCode);
+		let title = '';
+		if(pos === -1){
+			status.push(statusCode);
+			msg_text.push(msg);
+			title = msg_text[msg_text.length - 1];
+		}else{
+			title = msg_text[pos];
+		}
+		uni.showToast({
+			title: title,
+			icon: 'none',
+			duration: 2000,
+			position: 'bottom'
+		});
+		if(statusCode === -403){
+			setTimeout(() => {
+				uni.reLaunch({
+					url: '/pages/login/login'//登录界面
+				})
+			}, 1000)
+		}
+	}
+	
+	log(url, param, res) {
+		console.log('*********************************************************');
+		console.log('当前请求接口: ' + url);
+		console.log(param);
+		console.log(res);
+		console.log('*********************************************************');
+	}
 }
-
-export default Request;

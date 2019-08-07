@@ -1,84 +1,53 @@
 <template>
-	<view class="container">
-		<view @tap="showAlert">点击我显示alert</view>
-		<alert ref="alert" @confirm="confirm">123</alert>
+	<view class="content">
+		<image class="logo" src="/static/logo.png"></image>
+		<view class="text-area">
+			<text class="title">{{title}}</text>
+		</view>
 	</view>
 </template>
 
 <script>
-	
-	import { mapMutations } from 'vuex'
-	import index from '../../service/Index.js'
+	import service from '../../request/service.js'
 	export default {
 		data() {
 			return {
-				ajaxStop: false,
-				ajaxCount: 0
+				title: 'Hello'
 			}
 		},
-
-		components: {
-			
-		},
-
 		onLoad() {
-			this.indexList();
-			
-// 			let token = uni.getStorageSync('token');
-// 
-// 			if (token) {
-// 				// 保持登录状态
-// 				this.toLogin();
-// 
-// 				// 其他业务逻辑
-// 
-// 			} else {
-// 				// uni.redirectTo({
-// 				// 	url: '/pages/login/login'
-// 				// });
-// 			}
+			service.test('何六', 1, 10);
 		},
-
 		methods: {
-			...mapMutations('users', ['toLogin']),
 			
-			showAlert() {
-				this.$refs.alert.open();
-			},
-			
-			confirm() {
-				this.$refs.alert.close();
-			},
-			
-			indexList(){
-				index.indexList().then(res => {
-					this.ajaxCountComputed();
-				});
-			},
-			
-			ajaxCountComputed() {
-				const COUNT = 1;
-				this.ajaxCount += 1;
-				if(this.ajaxCount == COUNT){
-					this.ajaxStop = true;
-					console.log(this.ajaxCount)
-				}
-			},
-
-			onTap(index) {
-				console.log(index)
-				this.activeIndex = index;
-			},
-
-			onChange(e) {
-				let index = e.detail.current;
-				console.log(index)
-				this.currentIndex = index;
-			}
 		}
 	}
 </script>
 
-<style lang="less" scoped>
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 
+	.logo {
+		height: 200upx;
+		width: 200upx;
+		margin-top: 200upx;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 50upx;
+	}
+
+	.text-area {
+		display: flex;
+		justify-content: center;
+	}
+
+	.title {
+		font-size: 36upx;
+		color: #8f8f94;
+	}
 </style>
