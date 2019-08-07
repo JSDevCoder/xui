@@ -16,7 +16,13 @@
 			}
 		},
 		onLoad() {
-			service.test('何六', 1, 10);
+			service.test('何六', 1, 10).then(res => {
+				if(res.code === 1){
+					
+				}else{
+					service.statusHandle(res.code, res.msg);
+				}
+			});
 		},
 		methods: {
 			

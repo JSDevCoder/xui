@@ -27,7 +27,7 @@ export default class Request {
 	 */
 	getRequestURL() {
 		const dev = {
-			baseUrl: 'http://192.168.118.115/tp5',
+			baseUrl: 'http://192.168.108.115/tp5',
 			resUrl: 'http://192.168.108.115/'
 		};
 		
@@ -102,7 +102,7 @@ export default class Request {
 		}
 		const [error, res]  = await uni.request(options);
 		uni.hideLoading();
-		if(error.errMsg === 'request:fail timeout'){
+		if(error && error.errMsg === 'request:fail timeout'){
 			this.log(options.url, options.data, error);
 			uni.showToast({
 				title: '请求超时',
@@ -113,7 +113,7 @@ export default class Request {
 			return;
 		}
 		this.log(options.url, options.data, res);
-		if(res && res.status === 200){
+		if(res && res.statusCode === 200){
 			return res.data;
 		}else{
 			this.statusHandle(res.status);
@@ -133,16 +133,20 @@ export default class Request {
 			'当前登录已失效，请重新登录'
 		];
 		const pos = status.indexOf(statusCode);
+		console.log(pos)
 		let title = '';
 		if(pos === -1){
 			status.push(statusCode);
 			msg_text.push(msg);
+			console.log(status)
+			console.log(msg_text)
 			title = msg_text[msg_text.length - 1];
 		}else{
 			title = msg_text[pos];
 		}
+		console.log(title)
 		uni.showToast({
-			title: title,
+			title,
 			icon: 'none',
 			duration: 2000,
 			position: 'bottom'
