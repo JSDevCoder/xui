@@ -100,16 +100,16 @@
 	
 	.x-btn {
 		display: inline-block;
-		margin-right:1rem;
-		margin-bottom: 1rem;
+		margin-right:32rpx;
+		margin-bottom: 32rpx;
 		font-weight: 400;
 		text-align: center;
 		white-space: nowrap;
 		border: 1px solid transparent;
-		font-size: 1rem;
-		padding: .375rem .75rem;
+		font-size: 32rpx;
+		padding: 12rpx 24rpx;
 		line-height: 1.5;
-		border-radius: .25rem;
+		border-radius: 8rpx;
 		transition: color .15s ease-in-out,
 			background-color .15s ease-in-out,
 			border-color .15s ease-in-out,
@@ -224,17 +224,17 @@
 		}
 		
 		&.x-btn-lg{
-			padding: .5rem 1rem;
-			font-size: 1.25rem;
+			padding: 16rpx 32rpx;
+			font-size: 40rpx;
 			line-height: 1.5;
-			border-radius: .3rem;
+			border-radius: 9.6rpx;
 		}
 		
 		&.x-btn-sm{
-			padding: .25rem .5rem;
-			font-size: .875rem;
+			padding: 8rpx 16rpx;
+			font-size: 28rpx;
 			line-height: 1.5;
-			border-radius: .2rem;
+			border-radius: 6.4rpx;
 		}
 		
 		&.x-btn-block{
