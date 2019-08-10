@@ -28,7 +28,7 @@
 </template>
 
 <script>
-	import service from '../../request/service.js'
+	import service from '../../common/service.js'
 	import xButton from '../../components/ui/button.vue'
 	export default {
 		data() {

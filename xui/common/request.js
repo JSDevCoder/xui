@@ -5,6 +5,7 @@
  */
 export default class Request {
 	constructor() {
+		//测试
 		// 当前开发环境
 		this.mode = 'dev';
 		
