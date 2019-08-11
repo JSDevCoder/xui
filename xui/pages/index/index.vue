@@ -24,12 +24,15 @@
 		<x-button btn-outline="primary" btn-size="sm" btn-text="小按钮"></x-button>
 		<x-button btn-type="primary" btn-size="sm" btn-block="true" btn-text="small btn"></x-button>
 		<x-button btn-outline="primary" btn-size="sm" btn-block="true" btn-text="小按钮"></x-button>
+		<x-side-bar ref="sideBar"></x-side-bar>
+		<view @tap="openSideBar">点击打开sideBar</view>
 	</view>
 </template>
 
 <script>
 	import service from '../../common/service.js'
 	import xButton from '../../components/ui/button.vue'
+	import xSideBar from '../../components/ui/side-bar.vue'
 	export default {
 		data() {
 			return {
@@ -38,7 +41,8 @@
 		},
 		
 		components: {
-			xButton
+			xButton,
+			xSideBar
 		},
 		
 		onLoad() {
@@ -51,7 +55,9 @@
 			// });
 		},
 		methods: {
-			
+			openSideBar() {
+				this.$refs.sideBar.open();
+			}
 		}
 	}
 </script>

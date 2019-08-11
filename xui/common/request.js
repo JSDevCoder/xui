@@ -11,16 +11,6 @@ export default class Request {
 		
 		// 当前请求对象
 		this.task = null;
-		
-		// 默认配置
-		this.options = {
-			url: '',
-			data: {},
-			method: 'POST',
-			header: {},
-			dataType: 'json',
-			responseType: 'text'
-		};
 	}
 	
 	/**
