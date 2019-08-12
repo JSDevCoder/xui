@@ -100,33 +100,32 @@
 			border-radius .15s ease-in-out;
 	}
 	
-	@commonColor: #fff;
-	@primaryColor:#007aff;
-	@secondaryColor: #6c757d;
-	@successColor: #28a745;
-	@dangerColor: #dc3545;
-	@warningColor: #ffc107;
-	@infoColor: #17a2b8;
-	@lightColor: #f8f9fa;
-	@darkColor: #343a40;
-	@linkColor: #007bff;
-	@list1: primary, secondary, success, danger, warning, info, light, dark, link;
-	@list2: @primaryColor, @secondaryColor, @successColor, @dangerColor, @warningColor, @infoColor, @lightColor, @darkColor, @linkColor;
+	@common: #fff;
+	@primary:#007aff;
+	@secondary: #6c757d;
+	@success: #28a745;
+	@danger: #dc3545;
+	@warning: #ffc107;
+	@info: #17a2b8;
+	@light: #f8f9fa;
+	@dark: #343a40;
+	@link: #007bff;
+	@list: primary, secondary, success, danger, warning, info, light, dark, link;
 	
-	.loop(@n, @i: 1, @v:extract(@list1, @i), @v1:extract(@list2, @i)) when (@i <= @n){
+	.loop(@n, @i: 1, @v:extract(@list, @i)) when (@i <= @n){
 		.x-btn-@{v}{
-			background-color: @v1;
-			color: @commonColor;
-			border-color: @v1;
+			background-color: @@v;
+			color: @common;
+			border-color: @@v;
 		}
 		.x-btn-outline-@{v}{
-			background-color: @commonColor;
-			color: @v1;
-			border-color: @v1;
+			background-color: @common;
+			color: @@v;
+			border-color: @@v;
 		}
 		.loop(@n, (@i + 1));
 	}
-	.loop(length(@list1));
+	.loop(length(@list));
 	.x-btn-lg{
 		padding: 8px 16px;
 		font-size: 20px;
