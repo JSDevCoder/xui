@@ -1,10 +1,10 @@
 <template>
 	<div 
 		class="x-btn" 
-		:class="[computedType, computedSize, computedBtnLine, computedActive, computedBlock]"
+		:class="computedClassName"
 		@tap="btnTap"
 	>
-		{{computedText}}
+		{{computedBtnText}}
 	</div>
 </template>
 
@@ -53,28 +53,23 @@
 		},
 
 		computed: {
-			computedType() {
-				return this.btnType ? 'x-btn-' + this.btnType : '';
+			computedClassName() {
+				const btnType = this.btnType ? 'x-btn-' + this.btnType : '';
+				const btnSize = this.btnSize ? 'x-btn-' + this.btnSize : '';
+				const btnOutline = this.btnOutline ? 'x-btn-outline-' + this.btnOutline : '';
+				const btnActive = this.btnActive === 'true' ? 'x-btn-active' : '';
+				const btnBlock = this.btnBlock === 'true' ? 'x-btn-block' : '';
+				return [
+					btnType,
+					btnSize,
+					btnOutline,
+					btnActive,
+					btnBlock
+				]
 			},
-
-			computedSize() {
-				return this.btnSize ? 'x-btn-' + this.btnSize : '';
-			},
-
-			computedText() {
+			
+			computedBtnText() {
 				return this.btnText;
-			},
-
-			computedBtnLine() {
-				return this.btnOutline ? 'x-btn-outline-' + this.btnOutline : '';
-			},
-
-			computedActive() {
-				return this.btnActive === 'true' ? 'x-btn-active' : '';
-			},
-
-			computedBlock() {
-				return this.btnBlock === 'true' ? 'x-btn-block' : '';
 			}
 		},
 		
@@ -87,17 +82,6 @@
 </script>
 
 <style lang="less" scoped>
-	@commonColor: #fff;
-	@primaryColor: #007aff;
-	@secondaryColor: #6c757d;
-	@successColor: #28a745;
-	@dangerColor: #dc3545;
-	@warningColor: #ffc107;
-	@infoColor: #17a2b8;
-	@lightColor: #f8f9fa;
-	@darkColor: #343a40;
-	@linkColor: #007bff;
-	
 	.x-btn {
 		display: inline-block;
 		margin-right:32rpx;
@@ -114,132 +98,49 @@
 			background-color .15s ease-in-out,
 			border-color .15s ease-in-out,
 			border-radius .15s ease-in-out;
-
-		&.x-btn-primary {
-			background-color: @primaryColor;
+	}
+	
+	@commonColor: #fff;
+	@primaryColor:#007aff;
+	@secondaryColor: #6c757d;
+	@successColor: #28a745;
+	@dangerColor: #dc3545;
+	@warningColor: #ffc107;
+	@infoColor: #17a2b8;
+	@lightColor: #f8f9fa;
+	@darkColor: #343a40;
+	@linkColor: #007bff;
+	@list1: primary, secondary, success, danger, warning, info, light, dark, link;
+	@list2: @primaryColor, @secondaryColor, @successColor, @dangerColor, @warningColor, @infoColor, @lightColor, @darkColor, @linkColor;
+	
+	.loop(@n, @i: 1, @v:extract(@list1, @i), @v1:extract(@list2, @i)) when (@i <= @n){
+		.x-btn-@{v}{
+			background-color: @v1;
 			color: @commonColor;
-			border-color: @primaryColor;
+			border-color: @v1;
 		}
-		
-		&.x-btn-outline-primary{
+		.x-btn-outline-@{v}{
 			background-color: @commonColor;
-			color: @primaryColor;
-			border-color: @primaryColor;
+			color: @v1;
+			border-color: @v1;
 		}
-
-		&.x-btn-secondary {
-			background-color: @secondaryColor;
-			color: @commonColor;
-			border-color: @secondaryColor;
-		}
-		
-		&.x-btn-outline-secondary{
-			background-color: @commonColor;
-			color: @secondaryColor;
-			border-color: @secondaryColor;
-		}
-		
-		&.x-btn-success{
-			background-color: @successColor;
-			color: @commonColor;
-			border-color: @successColor;
-		}
-		
-		&.x-btn-outline-success{
-			background-color: @commonColor;
-			color: @successColor;
-			border-color: @successColor;
-		}
-		
-		&.x-btn-danger{
-			background-color: @dangerColor;
-			color: @commonColor;
-			border-color: @dangerColor;
-		}
-		
-		&.x-btn-outline-danger{
-			background-color: @commonColor;
-			color: @dangerColor;
-			border-color: @dangerColor;
-		}
-		
-		&.x-btn-warning{
-			background-color: @warningColor;
-			color: @commonColor;
-			border-color: @warningColor;
-		}
-		
-		&.x-btn-outline-warning{
-			background-color: @commonColor;
-			color: @warningColor;
-			border-color: @warningColor;
-		}
-		
-		&.x-btn-info{
-			background-color: @infoColor;
-			color: @commonColor;
-			border-color: @infoColor;
-		}
-		
-		&.x-btn-outline-info{
-			background-color: @commonColor;
-			color: @infoColor;
-			border-color: @infoColor;
-		}
-		
-		&.x-btn-light{
-			background-color: @lightColor;
-			color: @commonColor;
-			border-color: @lightColor;
-		}
-		
-		&.x-btn-outline-light{
-			background-color: @commonColor;
-			color: @lightColor;
-			border-color: @lightColor;
-		}
-		
-		&.x-btn-dark{
-			background-color: @darkColor;
-			color: @commonColor;
-			border-color: @darkColor;
-		}
-		
-		&.x-btn-outline-dark{
-			background-color: @commonColor;
-			color: @darkColor;
-			border-color: @darkColor;
-		}
-		
-		&.x-btn-link{
-			background-color: @linkColor;
-			color: @commonColor;
-			border-color: @linkColor;
-		}
-		
-		&.x-btn-outline-link{
-			background-color: @commonColor;
-			color: @linkColor;
-			border-color: @linkColor;
-		}
-		
-		&.x-btn-lg{
-			padding: 16rpx 32rpx;
-			font-size: 40rpx;
-			line-height: 1.5;
-			border-radius: 9.6rpx;
-		}
-		
-		&.x-btn-sm{
-			padding: 8rpx 16rpx;
-			font-size: 28rpx;
-			line-height: 1.5;
-			border-radius: 6.4rpx;
-		}
-		
-		&.x-btn-block{
-			width:100%;
-			display: block;
-		}
+		.loop(@n, (@i + 1));
+	}
+	.loop(length(@list1));
+	.x-btn-lg{
+		padding: 16rpx 32rpx;
+		font-size: 40rpx;
+		line-height: 1.5;
+		border-radius: 9.6rpx;
+	}
+	.x-btn-sm{
+		padding: 8rpx 16rpx;
+		font-size: 28rpx;
+		line-height: 1.5;
+		border-radius: 6.4rpx;
+	}
+	.x-btn-block{
+		width:100%;
+		display: block;
 	}
 </style>
