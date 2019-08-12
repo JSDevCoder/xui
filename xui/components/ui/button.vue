@@ -84,8 +84,6 @@
 <style lang="less" scoped>
 	.x-btn {
 		display: inline-block;
-		margin-right:16px;
-		margin-bottom: 16px;
 		font-weight: 400;
 		text-align: center;
 		white-space: nowrap;
@@ -139,7 +137,6 @@
 		border-radius: 4px;
 	}
 	.x-btn-block{
-		width:100%;
 		display: block;
 	}
 </style>
