@@ -84,16 +84,16 @@
 <style lang="less" scoped>
 	.x-btn {
 		display: inline-block;
-		margin-right:32rpx;
-		margin-bottom: 32rpx;
+		margin-right:16px;
+		margin-bottom: 16px;
 		font-weight: 400;
 		text-align: center;
 		white-space: nowrap;
 		border: 1px solid transparent;
-		font-size: 32rpx;
-		padding: 12rpx 24rpx;
+		font-size: 16px;
+		padding: 6px 12px;
 		line-height: 1.5;
-		border-radius: 8rpx;
+		border-radius: 4px;
 		transition: color .15s ease-in-out,
 			background-color .15s ease-in-out,
 			border-color .15s ease-in-out,
@@ -128,16 +128,16 @@
 	}
 	.loop(length(@list1));
 	.x-btn-lg{
-		padding: 16rpx 32rpx;
-		font-size: 40rpx;
+		padding: 8px 16px;
+		font-size: 20px;
 		line-height: 1.5;
-		border-radius: 9.6rpx;
+		border-radius: 6px;
 	}
 	.x-btn-sm{
-		padding: 8rpx 16rpx;
-		font-size: 28rpx;
+		padding: 4px 8px;
+		font-size: 14px;
 		line-height: 1.5;
-		border-radius: 6.4rpx;
+		border-radius: 4px;
 	}
 	.x-btn-block{
 		width:100%;
