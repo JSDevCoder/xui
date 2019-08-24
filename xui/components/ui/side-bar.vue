@@ -9,6 +9,7 @@
 		<!-- 侧栏 -->
 		<x-popover left="0" bottom="0" width="50" min-height="100" ref="popover">
 			<div @tap="close">点击关闭</div>
+			<slot></slot>
 		</x-popover>
 	</div>
 </template>
