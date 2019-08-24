@@ -4,6 +4,7 @@
 	 -->
 	 <div 
 		class="popover"
+		:class="slide"
 		:style="pos"
 		v-show="isShow"
 	 >
@@ -20,45 +21,17 @@
 			}
 		},
 		props: {
-			// 弹出层的位置
 			position: {
 				type: String,
 				default: 'fixed'
 			},
-			
-			left: {
-				type: String,
-				default: ''
-			},
-			
-			right: {
-				type: String,
-				default: ''
-			},
-			
-			top: {
-				type: String,
-				default: ''
-			},
-			
-			bottom: {
-				type: String,
-				default: ''
-			},
-			
-			// 弹出层的宽度
-			width: {
-				type: String,
-				default: '100'
-			},
-			
-			// 弹出层最小高度
-			minHeight: {
-				type: String,
-				default: '40'
-			},
-			
-			// 背景颜色
+			left: String,
+			right: String,
+			top: String,
+			bottom: String,
+			width: String,
+			minHeight: String,
+			slide: String,
 			bgColor: {
 				type: String,
 				default: '#fff'
@@ -72,15 +45,20 @@
 				const right = this.right ? this.right + 'rpx' : '';
 				const top = this.top ? this.top + 'rpx' : '';
 				const bottom = this.bottom ? this.bottom + 'rpx' : '';
-				const width = this.width + '%';
-				const minHeight = this.minHeight + '%';
+				const width = this.width ? this.width + '%' : '';
+				const minHeight = this.minHeight ? this.minHeight + '%' : '';
 				const backgroundColor = this.bgColor;
-				return {position, left, right, top, bottom, width, minHeight, backgroundColor};
+				return {
+					position, 
+					left, 
+					right, 
+					top, 
+					bottom, 
+					width, 
+					minHeight, 
+					backgroundColor
+				};
 			}
-		},
-		
-		created() {
-			console.log(this.pos)
 		},
 		
 		methods: {
@@ -96,7 +74,52 @@
 </script>
 
 <style lang="less" scoped>
-	.popover{
-		
+	@keyframes slide_left {
+		0% {
+			left: -50%;
+		}
+		100% {
+			left: 0;
+		}
+	}
+	@keyframes slide_right {
+		0% {
+			right: -50%;
+		}
+		100% {
+			right: 0;
+		}
+	}
+	@keyframes slide_bottom {
+		0% {
+			bottom: -40%;
+		}
+		100% {
+			bottom: 0;
+		}
+	}
+	@keyframes slide_top {
+		0% {
+			top: -50%;
+		}
+		100% {
+			top: 0;
+		}
+	}
+	
+	.slide-left{
+		animation: slide_left .3s;
+	}
+	
+	.slide-right{
+		animation: slide_right .3s;
+	}
+	
+	.slide-top{
+		animation: slide_top .3s;
+	}
+	
+	.slide-bottom{
+		animation: slide_bottom .3s;
 	}
 </style>
