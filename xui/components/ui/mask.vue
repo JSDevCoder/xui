@@ -2,7 +2,7 @@
 	<!-- 
 	 遮罩
 	 -->
-	 <view class="mask" v-if="isShow"></view>
+	 <view class="mask" v-if="isShow" @tap="tapMask"></view>
 </template>
 
 <script>
@@ -20,6 +20,10 @@
 			
 			close() {
 				this.isShow = false;
+			},
+			
+			tapMask() {
+				this.$emit('tapMask');
 			}
 		}
 	}

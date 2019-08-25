@@ -1,0 +1,29 @@
+<template>
+	<div class="popup">
+		<text>{{title}}</text>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			title: ''
+		},
+		
+		created() {
+			const globalEvent = weex.requireModule('globalEvent');
+			globalEvent.addEventListener('plusMessage', e => {
+				console.log(e.data)
+				this.title = e.data.title;
+			});
+		}
+	}
+</script>
+
+<style>
+.popup{
+	width:200wx;
+	height:200wx;
+	/* background-color: red; */
+}
+</style>

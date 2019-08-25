@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<!-- 遮罩 -->
-		<x-mask ref="mask" @tap="tapMask"></x-mask>
+		<x-mask ref="mask" @tapMask="tapMask"></x-mask>
 		
 		<!-- 侧栏 -->
 		<x-side-bar ref="sideBar">
@@ -22,6 +22,7 @@
 		
 		<button type="primary" @tap="openSideBar">点击打开侧栏</button>
 		<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
+		<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
 	</view>
 </template>
 
@@ -46,14 +47,25 @@
 		onLoad() {
 			// #ifdef APP-PLUS
 			const navBar = uni.getSubNVueById('navBar');
-			console.log(navBar)
+
 			plus.webview.postMessageToUniNView({
 				title: '测试一下哟'
 			}, 'navBar')
+
 			navBar.show();
+			
 			// #endif
 		},
 		methods: {
+			openNVue() {
+				const popup = uni.getSubNVueById('pop');
+				popup.setStyle({
+					width: '80%',
+					height: '100%'
+				})
+				popup.show('slide-in-left');
+			},
+			
 			openSideBar() {
 				this.$refs.sideBar.open();
 				this.$refs.mask.open();
@@ -72,7 +84,6 @@
 				}else{
 					this.$refs.bottomPopover.close();
 				}
-				
 			},
 			
 			confirm(){

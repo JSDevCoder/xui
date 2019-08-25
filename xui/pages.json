@@ -13,6 +13,13 @@
 						"style": {
 							
 						}
+					}, {
+						"id": "pop",
+						"path": "/components/nvue/side-bar.nvue",
+						"type": "popup",
+						"style": {
+							"zindex": 9999
+						}
 					}],
 					// #endif
 					

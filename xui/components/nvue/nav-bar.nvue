@@ -3,7 +3,7 @@
 		<div class="status-bar" :style="{height: getStatusBar}"></div>
 		<div class="bar">
 			<div class="icon-back">
-				<text class="ta-c c iconfont icon-back"></text>
+				<text class="ta-c c"></text>
 			</div>
 			<div class="title">
 				<text class="ta-c c">{{title}}</text> 
