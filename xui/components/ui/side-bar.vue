@@ -1,50 +1,68 @@
 <template>
 	<!-- 
-	 side-bar包含侧栏与遮罩
+	 弹出层
 	 -->
-	<div class="side-bar" v-show="isShow">
-		<!-- 遮罩 -->
-		<x-mask ref="mask" @maskTap="close"></x-mask>
-
-		<!-- 侧栏 -->
-		<x-popover class="popover" right="0" bottom="0" top="0" width="80" slide="slide-right" ref="popover">
-			<slot></slot>
-		</x-popover>
-	</div>
+	<view class="popover slide-right" v-if="isShow">
+		<slot></slot>
+	</view>
 </template>
 
 <script>
-	import xMask from './mask.vue'
-	import xPopover from './popover.vue'
 	export default {
+		name: 'x-popover',
+
 		data() {
 			return {
 				isShow: false
 			}
 		},
-		components: {
-			xMask,
-			xPopover
-		},
 
 		methods: {
 			open() {
 				this.isShow = true;
-				this.$refs.mask.open();
-				this.$refs.popover.open();
 			},
 
 			close() {
 				this.isShow = false;
-				this.$refs.mask.close();
-				this.$refs.popover.close();
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.popover{
-		padding: 16px;
+	@keyframes slide_right {
+		0% {
+			right: -80%;
+		}
+
+		100% {
+			right: 0;
+		}
+	}
+	
+	.popover {
+		position: fixed;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 80%;
+		background-color: #fff;
+		z-index: 999;
+	}
+
+	.slide-left {
+		animation: slide_left .3s;
+	}
+
+	.slide-right {
+		animation: slide_right .3s;
+	}
+
+	.slide-top {
+		animation: slide_top .3s;
+	}
+
+	.slide-bottom {
+		animation: slide_bottom .3s;
 	}
 </style>

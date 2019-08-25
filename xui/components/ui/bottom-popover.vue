@@ -1,63 +1,69 @@
 <template>
 	<!-- 
-	 底部弹窗
+	 弹出层
 	 -->
-	<div class="bottom-popover" v-show="isShow">
-		<!-- 遮罩 -->
-		<x-mask ref="mask" @maskTap="close"></x-mask>
-
-		<!-- 侧栏 -->
-		<x-popover class="x-popover" left="0" bottom="0" right="0" min-height="40" slide="slide-bottom" ref="popover">
-			<div class="title">
-				<div>弹出层</div>
-				<x-button btn-type="danger" btn-size="sm" btn-text="关闭" @btnTap="close"></x-button>
-			</div>
-			<slot></slot>
-		</x-popover>
-	</div>
+	<view class="popover slide-bottom" v-if="isShow">
+		<slot></slot>
+	</view>
 </template>
 
 <script>
-	import xMask from './mask.vue'
-	import xPopover from './popover.vue'
-	import xButton from './button.vue'
 	export default {
-		name: 'x-bottom-popover',
+		name: 'x-popover',
+
 		data() {
 			return {
 				isShow: false
 			}
 		},
-		components: {
-			xMask,
-			xPopover,
-			xButton
-		},
+
 		methods: {
 			open() {
 				this.isShow = true;
-				this.$refs.mask.open();
-				this.$refs.popover.open();
 			},
-			
+
 			close() {
 				this.isShow = false;
-				this.$refs.mask.close();
-				this.$refs.popover.close();
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.popover{
-		.title {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			border-bottom:1px solid #d8d8d8;
-			padding:8px 16px;
+	@keyframes slide_bottom {
+		0% {
+			bottom: -40%;
 		}
+
+		100% {
+			bottom: 0;
+		}
+	}
+
+	.popover {
+		position: fixed;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		min-height:40%;
+		background-color: #fff;
+		z-index: 999;
+	}
+
+	.slide-left {
+		animation: slide_left .3s;
+	}
+
+	.slide-right {
+		animation: slide_right .3s;
+	}
+
+	.slide-top {
+		animation: slide_top .3s;
+	}
+
+	.slide-bottom {
+		animation: slide_bottom .3s;
 	}
 </style>

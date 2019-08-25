@@ -2,7 +2,7 @@
 	<!-- 
 	 遮罩
 	 -->
-	 <div class="mask" v-show="isShow" @tap="maskTap"></div>
+	 <view class="mask" v-if="isShow"></view>
 </template>
 
 <script>
@@ -20,10 +20,6 @@
 			
 			close() {
 				this.isShow = false;
-			},
-			
-			maskTap() {
-				this.$emit('maskTap');
 			}
 		}
 	}
@@ -38,5 +34,6 @@
 		right:0;
 		background-color: rgba(0, 0, 0, .6);
 		transition: all .3s;
+		z-index: 998;
 	}
 </style>

@@ -1,11 +1,11 @@
 <template>
-	<div 
+	<view 
 		class="x-btn" 
 		:class="computedClassName"
 		@tap="btnTap"
 	>
 		{{computedBtnText}}
-	</div>
+	</view>
 </template>
 
 <script>

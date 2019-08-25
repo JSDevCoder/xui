@@ -5,6 +5,17 @@
 			"style": {
 				"navigationBarTitleText": "uni-app",
 				"app-plus": {
+					// #ifdef APP-PLUS
+					"subNVues": [{
+						"id": "navBar",
+						"path": "/components/nvue/nav-bar.nvue",
+						"type": "navigationBar",
+						"style": {
+							
+						}
+					}],
+					// #endif
+					
 					"titleNView": false
 				}
 			}
