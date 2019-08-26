@@ -1,5 +1,9 @@
 <template>
 	<view class="container">
+		<!-- #ifdef H5 -->
+		<x-nav-bar title="H5标题哟"></x-nav-bar>
+		<!-- #endif -->
+		
 		<!-- 遮罩 -->
 		<x-mask ref="mask" @tapMask="tapMask"></x-mask>
 		
@@ -20,11 +24,13 @@
 			</view>
 		</x-bottom-popover>
 		
-		<button type="primary" @tap="openSideBar">点击打开侧栏</button>
-		<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
-		<!-- #ifdef APP-PLUS -->
-		<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
-		<!-- #endif -->
+		<view class="btns">
+			<button type="primary" @tap="openSideBar">点击打开侧栏</button>
+			<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
+			<!-- #ifdef APP-PLUS -->
+			<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
+			<!-- #endif -->
+		</view>
 	</view>
 </template>
 
@@ -33,6 +39,10 @@
 	import xSideBar from '../../components/ui/side-bar.vue'
 	import xBottomPopover from '../../components/ui/bottom-popover.vue'
 	import xMask from '../../components/ui/mask.vue'
+	// #ifdef H5
+	import xNavBar from '../../components/ui/nav-bar.vue'
+	// #endif
+	
 	export default {
 		data() {
 			return {
@@ -43,7 +53,10 @@
 		components: {
 			xSideBar,
 			xBottomPopover,
-			xMask
+			xMask,
+			// #ifdef H5
+			xNavBar
+			// #endif
 		},
 
 		onLoad() {
@@ -99,7 +112,6 @@
 
 <style lang="less" scoped>
 	.container {
-		padding: 16px;
 
 		.mt {
 			margin-top: 16px;
@@ -111,6 +123,10 @@
 
 		.content {
 			padding: 16px;
+		}
+		
+		.btns{
+			padding:16px;
 		}
 	}
 </style>

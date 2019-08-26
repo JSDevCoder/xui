@@ -65,11 +65,11 @@
 
 	.open-slide {
 		right: 0;
-		animation: open_slide .8s;
+		animation: open_slide .4s;
 	}
 	
 	.close-slide{
 		right: -80%;
-		animation: close_slide .8s;
+		animation: close_slide .4s;
 	}
 </style>
