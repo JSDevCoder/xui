@@ -1,7 +1,8 @@
 <template>
 	<view class="container">
 		<!-- #ifdef H5 -->
-		<x-nav-bar back="返回" title="H5标题哟" :icons="icons"></x-nav-bar>
+		<!-- H5导航条 -->
+		<x-nav-bar back="返回" title="H5标题哟" :icons="icons" @tapIcon="tapIcon"></x-nav-bar>
 		<!-- #endif -->
 		
 		<!-- 遮罩 -->
@@ -48,7 +49,9 @@
 			return {
 				title: 'Hello',
 				icons: [{
-					text: '#'
+					text: '侧栏'
+				}, {
+					text: '底栏'
 				}]
 			}
 		},
@@ -71,10 +74,24 @@
 			}, 'navBar')
 
 			navBar.show();
-			
 			// #endif
 		},
 		methods: {
+			// #ifdef H5
+			tapIcon(index) {
+				console.log(index)
+				console.log('当前点击了第' + index + '个icon')
+				console.log(this.icons[index])
+				
+				if(index === 0){
+					this.openSideBar();
+				}else if(index === 1) {
+					this.openBottomPopover();
+				}
+				
+			},
+			// #endif
+			
 			// #ifdef APP-PLUS
 			openNVue() {
 				const popup = uni.getSubNVueById('pop');
