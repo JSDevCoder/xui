@@ -82,7 +82,6 @@
 			},
 
 			tapMask() {
-				console.log(23)
 				this.$refs.mask.close();
 				if(this.$refs.sideBar.isShow){
 					this.$refs.sideBar.close();

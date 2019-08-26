@@ -2,7 +2,7 @@
 	<!-- 
 	 弹出层
 	 -->
-	<view class="popover slide-bottom" v-if="isShow">
+	<view class="popover" :class="animation">
 		<slot></slot>
 	</view>
 </template>
@@ -13,24 +13,27 @@
 
 		data() {
 			return {
-				isShow: false
+				isShow: false,
+				animation: ''
 			}
 		},
 
 		methods: {
 			open() {
 				this.isShow = true;
+				this.animation = 'open-slide';
 			},
 
 			close() {
 				this.isShow = false;
+				this.animation = 'close-slide';
 			}
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	@keyframes slide_bottom {
+	@keyframes open_slide {
 		0% {
 			bottom: -40%;
 		}
@@ -39,31 +42,34 @@
 			bottom: 0;
 		}
 	}
+	
+	@keyframes close_slide {
+		0% {
+			bottom: 0;
+		}
+	
+		100% {
+			bottom: -40%;
+		}
+	}
 
 	.popover {
 		position: fixed;
 		right: 0;
 		left: 0;
-		bottom: 0;
-		width: 100%;
+		bottom: -40%;
 		min-height:40%;
 		background-color: #fff;
 		z-index: 999;
 	}
 
-	.slide-left {
-		animation: slide_left .3s;
+	.open-slide {
+		bottom: 0;
+		animation: open_slide .8s;
 	}
-
-	.slide-right {
-		animation: slide_right .3s;
-	}
-
-	.slide-top {
-		animation: slide_top .3s;
-	}
-
-	.slide-bottom {
-		animation: slide_bottom .3s;
+	
+	.close-slide {
+		bottom: -40%;
+		animation: close_slide .8s;
 	}
 </style>
