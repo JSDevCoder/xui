@@ -22,7 +22,9 @@
 		
 		<button type="primary" @tap="openSideBar">点击打开侧栏</button>
 		<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
+		<!-- #ifdef APP-PLUS -->
 		<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
+		<!-- #endif -->
 	</view>
 </template>
 
@@ -57,6 +59,7 @@
 			// #endif
 		},
 		methods: {
+			// #ifdef APP-PLUS
 			openNVue() {
 				const popup = uni.getSubNVueById('pop');
 				popup.setStyle({
@@ -65,6 +68,8 @@
 				})
 				popup.show('slide-in-left');
 			},
+			
+			// #endif
 			
 			openSideBar() {
 				this.$refs.sideBar.open();
