@@ -2,16 +2,42 @@
 	<!-- 顶部导航 -->
 	<view class="wrap">
 		<view class="nav-bar">
-			<view class="back">返回</view>
+			<view class="back" :class="backIcon ? backIcon : ''">{{back ? back : ''}}</view>
 			<view class="title">{{title}}</view>
-			<view class="icons">#</view>
+			<view class="icons">
+				<view class="icon-item" v-for="(item, index) of icons" :key="index">
+					<view :class="item.icon ? item.icon : ''">{{item.text ? item.text : ''}}</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		props: ['title'],
+		props: {
+			title: {
+				type: String,
+				default: '默认标题'
+			},
+			
+			back: {
+				type: String,
+				default: ''
+			},
+			
+			backIcon: {
+				type: String,
+				default: ''
+			},
+			
+			icons: {
+				type: Array,
+				default() {
+					return [];
+				}
+			}
+		},
 		computed: {
 			statusBarHeight() {
 				return uni.getSystemInfoSync().statusBarHeight;
@@ -27,10 +53,7 @@
 		background-color: #cc0200;
 		color:#fff;
 		
-		.back, .icons{
-			min-width:40px;
-			text-align:center;
-		}
+		
 
 		.nav-bar{
 			position: fixed;
@@ -43,6 +66,28 @@
 			justify-content: space-between;
 			align-items: center;
 			height:44px;
+			
+			.back, .icons{
+				min-width:48px;
+				text-align:center;
+			}
+			
+			.title{
+				text-align:center;
+			}
+			
+			.icons{
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+				align-items: center;
+				
+				.icon-item{
+					flex-grow: 1;
+				}
+			}
 		}
+		
+		
 	}
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<!-- #ifdef H5 -->
-		<x-nav-bar title="H5标题哟"></x-nav-bar>
+		<x-nav-bar back="返回" title="H5标题哟" :icons="icons"></x-nav-bar>
 		<!-- #endif -->
 		
 		<!-- 遮罩 -->
@@ -46,7 +46,10 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
+				icons: [{
+					text: '#'
+				}]
 			}
 		},
 
