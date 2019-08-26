@@ -13,5 +13,7 @@
 </script>
 
 <style>
-	
+	page{
+		font-size: 14px;
+	}
 </style>
