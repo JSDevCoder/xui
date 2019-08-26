@@ -21,3 +21,10 @@
 [1.自定义顶部导航条(nvue)](#)  
 [2.侧栏](#)  
 
+### [数据请求](./xui/common/)
+
+[1.基于uni.request封装的ajax请求(request.js)](#)
+[2.业务逻辑service(service.js)](#)
+[3.API集合(api.js)](#)
+[3.工具函数(tools.js)](#)
+
