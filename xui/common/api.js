@@ -3,9 +3,7 @@
  * @author hexinshi
  * @email hexinshi@ebring.com.cn
  */
-export default class Api {
-	constructor() {
+export default {
 		// 测试api
-		this.test = '/index/User/getUserList';
-	}
+		test: '/users/list'
 }

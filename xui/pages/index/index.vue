@@ -75,6 +75,15 @@
 
 			navBar.show();
 			// #endif
+			
+			service.test().then(res => {
+				if(res.code === 1){
+					
+				}else{
+					service.statusCodeHandle(res.code, res.msg);
+				}
+			});
+			
 		},
 		methods: {
 			// #ifdef H5

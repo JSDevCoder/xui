@@ -3,22 +3,19 @@
  * @author hexinshi
  * @email hexinshi@ebring.com.cn
  */
-export default class Request {
-	constructor() {
-		//测试
-		// 当前开发环境
-		this.mode = 'dev';
-		
-		// 当前请求对象
-		this.task = null;
-	}
+export default {
+	// 当前开发环境
+	mode: 'dev',
+	
+	// 当前请求对象
+	task: null,
 	
 	/**
 	 * 获取当前环境服务器地址
 	 */
 	getRequestURL() {
 		const dev = {
-			baseUrl: 'http://192.168.108.115/tp5',
+			baseUrl: 'http://192.168.108.115:3000',
 			resUrl: 'http://192.168.108.115/'
 		};
 		
@@ -34,7 +31,7 @@ export default class Request {
 		
 		return this.mode == 'prod' ? production : 
 				this.mode == 'test' ? test : dev;
-	}
+	},
 	
 	/**
 	 * 获取完整的请求地址
@@ -42,7 +39,7 @@ export default class Request {
 	 */
 	getApi(api) {
 		return this.getRequestURL().baseUrl + api;
-	}
+	},
 	
 	/**
 	 * 处理用户传递的参数
@@ -51,7 +48,7 @@ export default class Request {
 	getData(data) {
 		//对data做一些公共操作
 		return data;
-	}
+	},
 	
 	/**
 	 * 处理ajax请求中的header头
@@ -66,7 +63,7 @@ export default class Request {
 			options['Content-Type'] = 'application/json';
 		}
 		return options;
-	}
+	},
 	
 	/**
 	 * ajax请求简单封装
@@ -91,25 +88,29 @@ export default class Request {
 			dataType,
 			responseType
 		}
-		const [error, res]  = await uni.request(options);
-		uni.hideLoading();
-		if(error && error.errMsg === 'request:fail timeout'){
-			this.log(options.url, options.data, error);
-			uni.showToast({
-				title: '请求超时',
-				icon: 'none',
-				duration: 2000,
-				position: 'bottom'
-			});
-			return;
+		try{
+			const [error, res]  = await uni.request(options);
+			uni.hideLoading();
+			if(error && error.errMsg === 'request:fail timeout'){
+				this.log(options.url, options.data, error);
+				uni.showToast({
+					title: '请求超时',
+					icon: 'none',
+					duration: 2000,
+					position: 'bottom'
+				});
+				return;
+			}
+			this.log(options.url, options.data, res);
+			if(res && res.statusCode === 200){
+				return res.data;
+			}else{
+				this.statusHandle(res.statusCode);
+			}
+		}catch(e) {
+			console.log(e)
 		}
-		this.log(options.url, options.data, res);
-		if(res && res.statusCode === 200){
-			return res.data;
-		}else{
-			this.statusHandle(res.status);
-		}
-	}
+	},
 	
 	/**
 	 * 服务器请求状态处理
@@ -124,18 +125,14 @@ export default class Request {
 			'当前登录已失效，请重新登录'
 		];
 		const pos = status.indexOf(statusCode);
-		console.log(pos)
 		let title = '';
 		if(pos === -1){
 			status.push(statusCode);
 			msg_text.push(msg);
-			console.log(status)
-			console.log(msg_text)
 			title = msg_text[msg_text.length - 1];
 		}else{
 			title = msg_text[pos];
 		}
-		console.log(title)
 		uni.showToast({
 			title,
 			icon: 'none',
@@ -149,7 +146,7 @@ export default class Request {
 				})
 			}, 1000)
 		}
-	}
+	},
 	
 	log(url, param, res) {
 		console.log('*********************************************************');

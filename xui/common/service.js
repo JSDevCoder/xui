@@ -3,30 +3,20 @@
  * @author hexinshi
  * @email hexinshi@ebring.com.cn
  */
-import Request from './request.js'
-import Api from './api.js'
+import request from './request.js'
+import api from './api.js'
 
-class Service extends Request {
-	constructor(api) {
-		super();
-		// api接口
-		this.api = api;
-	}
+export default {
+	// api
+	api,
 	
-	
-	
+	// 状态处理
+	statusCodeHandle: request.statusHandle,
+
 	/**
 	 * 测试接口
 	 */
 	test(userName, pageNum, pageSize) {
-		return super.ajax(this.api.test, {
-			userName, 
-			pageNum, 
-			pageSize
-		}, {
-			method: 'GET'
-		});
-	}
+		return request.ajax(this.api.test);
+	},
 }
-
-export default new Service(new Api());

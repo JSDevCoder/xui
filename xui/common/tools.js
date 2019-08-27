@@ -3,6 +3,6 @@
  * @author hexinshi
  * @eamil hexinshi@ebring.com.cn
  */
-export default class Tools {
+export default {
 	
 }
