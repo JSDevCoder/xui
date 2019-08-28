@@ -32,6 +32,7 @@
 
 			close() {
 				this.isShow = false
+				this.$refs.mask.isShow = false;
 			}
 		}
 	}

@@ -21,7 +21,6 @@
 			},
 			
 			close() {
-				this.isShow = false;
 				this.$emit('close');
 			}
 		}
