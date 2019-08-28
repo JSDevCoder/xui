@@ -25,12 +25,15 @@
 			</view>
 		</x-bottom-popover>
 		
+		<x-loading ref="vueLoading"></x-loading>
+		
 		<view class="btns">
 			<button type="primary" @tap="openSideBar">点击打开侧栏</button>
 			<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
+			<button class="mt" type="default" @tap="openVueLoading">点击打开loding(vue)</button>
 			<!-- #ifdef APP-PLUS -->
 			<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
-			<button class="mt" type="primary" @tap="openLoading">点击打开loading</button>
+			<button class="mt" type="primary" @tap="openNvueLoading">点击打开loading(nvue)</button>
 			<!-- #endif -->
 		</view>
 	</view>
@@ -41,6 +44,7 @@
 	import xSideBar from '../../components/ui/side-bar.vue'
 	import xBottomPopover from '../../components/ui/bottom-popover.vue'
 	import xMask from '../../components/ui/mask.vue'
+	import xLoading from '../../components/ui/loading.vue'
 	// #ifdef H5
 	import xNavBar from '../../components/ui/nav-bar.vue'
 	// #endif
@@ -61,6 +65,7 @@
 			xSideBar,
 			xBottomPopover,
 			xMask,
+			xLoading,
 			// #ifdef H5
 			xNavBar
 			// #endif
@@ -117,12 +122,17 @@
 				popup.show('slide-in-left');
 			},
 			
-			openLoading() {
+			openNvueLoading() {
 				const loading = uni.getSubNVueById('loading');
 				loading.show();
 			},
 			
 			// #endif
+			
+			openVueLoading() {
+				this.$refs.mask.open();
+				this.$refs.vueLoading.open();
+			},
 			
 			openSideBar() {
 				this.$refs.sideBar.open();
@@ -138,8 +148,10 @@
 				this.$refs.mask.close();
 				if(this.$refs.sideBar.isShow){
 					this.$refs.sideBar.close();
-				}else{
+				}else if(this.$refs.bottomPopover.isShow){
 					this.$refs.bottomPopover.close();
+				}else if(this.$refs.vueLoading.isShow){
+					this.$refs.vueLoading.close();
 				}
 			},
 			
