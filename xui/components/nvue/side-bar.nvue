@@ -1,5 +1,9 @@
 <template>
-	<div class="popup">
+	<div class="side-bar">
+		<div :style="{height: statusBar + 'wx'}"></div>
+		<div class="close" :style="{top: statusBar + 'wx'}">
+			<text class="text" @click="close">关闭</text>
+		</div>
 		<text>{{title}}</text>
 	</div>
 </template>
@@ -7,23 +11,45 @@
 <script>
 	export default {
 		data() {
-			title: ''
+			return {
+				title: '侧栏'
+			}
+		},
+
+		created() {
+
 		},
 		
-		created() {
-			const globalEvent = weex.requireModule('globalEvent');
-			globalEvent.addEventListener('plusMessage', e => {
-				console.log(e.data)
-				this.title = e.data.title;
-			});
+		computed: {
+			statusBar() {
+				return uni.getSystemInfoSync().statusBarHeight;
+			}
+		},
+		
+		methods: {
+			close(){
+				console.log(123)
+				const sideBar = uni.getCurrentSubNVue();
+				console.log(sideBar)
+				sideBar.hide();
+			}
 		}
 	}
 </script>
 
 <style>
-.popup{
-	width:200wx;
-	height:200wx;
-	/* background-color: red; */
-}
+	.side-bar {
+		
+	}
+
+
+	.close {
+		width: 40wx;
+		height: 30wx;
+		position: absolute;
+		right:10wx;
+	}
+	.text{
+		color: #cc0200;
+	}
 </style>

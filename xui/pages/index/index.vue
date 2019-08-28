@@ -70,7 +70,6 @@
 		onLoad() {
 			// #ifdef APP-PLUS
 			this.createNavBar();
-			console.log(123)
 			// #endif
 			
 			// service.test().then(res => {
