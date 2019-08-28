@@ -1,13 +1,22 @@
 <template>
-	<!-- 
-	 弹出层
-	 -->
-	<view class="popover" :class="animation">
-		<slot></slot>
+	<view>
+		<!-- 
+		遮罩
+		 -->
+		<x-mask ref="mask" @close="close"></x-mask>
+
+		<!--
+		 弹出层
+		 -->
+		<view class="popover" :class="animation">
+			<slot></slot>
+		</view>
 	</view>
+
 </template>
 
 <script>
+	import xMask from './mask.vue'
 	export default {
 		name: 'x-popover',
 
@@ -17,16 +26,22 @@
 				animation: ''
 			}
 		},
+		
+		components: {
+			xMask
+		},
 
 		methods: {
 			open() {
 				this.isShow = true;
 				this.animation = 'open-slide';
+				this.$refs.mask.open();
 			},
 
 			close() {
 				this.isShow = false;
 				this.animation = 'close-slide';
+				this.$refs.mask.isShow = false;
 			}
 		}
 	}
@@ -42,12 +57,12 @@
 			bottom: 0;
 		}
 	}
-	
+
 	@keyframes close_slide {
 		0% {
 			bottom: 0;
 		}
-	
+
 		100% {
 			bottom: -40%;
 		}
@@ -58,7 +73,7 @@
 		right: 0;
 		left: 0;
 		bottom: -40%;
-		min-height:40%;
+		min-height: 40%;
 		background-color: #fff;
 		z-index: 999;
 	}
@@ -67,7 +82,7 @@
 		bottom: 0;
 		animation: open_slide .4s;
 	}
-	
+
 	.close-slide {
 		bottom: -40%;
 		animation: close_slide .4s;

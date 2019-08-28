@@ -5,14 +5,12 @@
 		<x-nav-bar back="返回" title="H5标题哟" :icons="icons" @tapIcon="tapIcon"></x-nav-bar>
 		<!-- #endif -->
 		
-		<!-- 遮罩 -->
-		<x-mask ref="mask" @tapMask="tapMask"></x-mask>
 		
 		<!-- 侧栏 -->
 		<x-side-bar ref="sideBar">
 			<view class="content">
 				<button type="primary" @tap="confirm">确定</button>
-				<button class="mt" type="default" plane @tap="tapMask">关闭</button>
+				<button class="mt" type="default" plane @tap="closePopover('sidebar')">关闭</button>
 			</view>
 		</x-side-bar>
 
@@ -21,7 +19,7 @@
 			<view>可填写任意内容</view>
 			<view class="content">
 				<button type="primary" @tap="confirm">确定</button>
-				<button class="mt" type="default" plane @tap="tapMask">关闭</button>
+				<button class="mt" type="default" plane @tap="closePopover('bottom')">关闭</button>
 			</view>
 		</x-bottom-popover>
 		
@@ -43,7 +41,6 @@
 	import service from '../../common/service.js'
 	import xSideBar from '../../components/ui/side-bar.vue'
 	import xBottomPopover from '../../components/ui/bottom-popover.vue'
-	import xMask from '../../components/ui/mask.vue'
 	import xLoading from '../../components/ui/loading.vue'
 	// #ifdef H5
 	import xNavBar from '../../components/ui/nav-bar.vue'
@@ -64,7 +61,6 @@
 		components: {
 			xSideBar,
 			xBottomPopover,
-			xMask,
 			xLoading,
 			// #ifdef H5
 			xNavBar
@@ -130,33 +126,27 @@
 			// #endif
 			
 			openVueLoading() {
-				this.$refs.mask.open();
 				this.$refs.vueLoading.open();
 			},
 			
 			openSideBar() {
 				this.$refs.sideBar.open();
-				this.$refs.mask.open();
 			},
 			
 			openBottomPopover() {
 				this.$refs.bottomPopover.open();
-				this.$refs.mask.open();
-			},
-
-			tapMask() {
-				this.$refs.mask.close();
-				if(this.$refs.sideBar.isShow){
-					this.$refs.sideBar.close();
-				}else if(this.$refs.bottomPopover.isShow){
-					this.$refs.bottomPopover.close();
-				}else if(this.$refs.vueLoading.isShow){
-					this.$refs.vueLoading.close();
-				}
 			},
 			
 			confirm(){
 				console.log('确定哦');
+			},
+			
+			closePopover(flag) {
+				if(flag === 'sidebar'){
+					this.$refs.sideBar.close();
+				}else if(flag === 'bottom'){
+					this.$refs.bottomPopover.close();
+				}
 			}
 		}
 	}

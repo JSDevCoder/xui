@@ -38,6 +38,7 @@
 				}
 			}
 		},
+		
 		computed: {
 			statusBarHeight() {
 				return uni.getSystemInfoSync().statusBarHeight;

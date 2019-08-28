@@ -1,21 +1,33 @@
 <template>
-	<view class="loading" v-if="isShow">
-		<image class="img loader" src="/static/logo.png"></image>
-		<text class="text">loading</text>
+	<view>
+		<!-- 遮罩 -->
+		<x-mask ref="mask" @close="close"></x-mask>
+		
+		<!-- loading -->
+		<view class="loading" v-if="isShow">
+			<image class="img loader" src="/static/logo.png"></image>
+			<text class="text">loading</text>
+		</view>
 	</view>
 </template>
 
 <script>
+	import xMask from './mask.vue'
 	export default {
 		data() {
 			return {
 				isShow: false
 			}
 		},
+		
+		components: {
+			xMask
+		},
 
 		methods: {
 			open() {
 				this.isShow = true;
+				this.$refs.mask.open();
 			},
 
 			close() {
