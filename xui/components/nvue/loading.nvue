@@ -1,0 +1,78 @@
+<template>
+	<div class="loading">
+		<image ref="img" class="img" src="/static/logo.png"></image>
+		<text class="text">loading</text>
+	</div>
+</template>
+
+<script>
+	const animation = weex.requireModule('animation');
+	export default {
+		data: function() {
+			return {
+				current_rotate: 0
+			}
+		},
+		mounted() {
+			let el = this.$refs.img
+			setInterval(() => {
+				this.rotate(el)
+			}, 1000)
+		},
+		methods: {
+			rotate(el) {
+				this.current_rotate += 90;
+				animation.transition(el, {
+					styles: {
+						color: '#FF0000',
+						transform: 'rotate(' + this.current_rotate + 'deg)',
+						transformOrigin: 'center center'
+					},
+					duration: 600, //ms
+					timingFunction: 'ease',
+					delay: 0 //ms
+				}, () => {
+
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	/* @keyframes loader-11 {
+		0% {
+			transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+		}
+
+		50% {
+			transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+		}
+
+		100% {
+			transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+		}
+	}
+
+	.loader-11 {
+		animation: loader-11 1.2s infinite ease-in-out;
+	}
+ */
+	.loading {
+		width: 80wx;
+		height: 80wx;
+		background-color: #ffffff;
+		justify-content: center;
+		align-items: center;
+		border-radius: 20;
+	}
+
+	.img {
+		width: 40wx;
+		height: 40wx;
+	}
+
+	.text {
+		margin-top: 6wx;
+	}
+</style>

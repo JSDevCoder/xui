@@ -30,6 +30,7 @@
 			<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
 			<!-- #ifdef APP-PLUS -->
 			<button class="mt" type="primary" @tap="openNVue">点击打开nvue窗口</button>
+			<button class="mt" type="primary" @tap="openLoading">点击打开loading</button>
 			<!-- #endif -->
 		</view>
 	</view>
@@ -67,22 +68,17 @@
 
 		onLoad() {
 			// #ifdef APP-PLUS
-			const navBar = uni.getSubNVueById('navBar');
-
-			plus.webview.postMessageToUniNView({
-				title: '测试一下哟'
-			}, 'navBar')
-
-			navBar.show();
+			this.createNavBar();
+			console.log(123)
 			// #endif
 			
-			service.test().then(res => {
-				if(res.code === 1){
-					
-				}else{
-					service.statusCodeHandle(res.code, res.msg);
-				}
-			});
+			// service.test().then(res => {
+			// 	if(res.code === 1){
+			// 		
+			// 	}else{
+			// 		service.statusCodeHandle(res.code, res.msg);
+			// 	}
+			// });
 			
 		},
 		methods: {
@@ -102,6 +98,16 @@
 			// #endif
 			
 			// #ifdef APP-PLUS
+			createNavBar() {
+				const navBar = uni.getSubNVueById('navBar');
+				
+				plus.webview.postMessageToUniNView({
+					title: '测试一下哟'
+				}, 'navBar')
+				
+				navBar.show();
+			},
+			
 			openNVue() {
 				const popup = uni.getSubNVueById('pop');
 				popup.setStyle({
@@ -109,6 +115,11 @@
 					height: '100%'
 				})
 				popup.show('slide-in-left');
+			},
+			
+			openLoading() {
+				const loading = uni.getSubNVueById('loading');
+				loading.show();
 			},
 			
 			// #endif

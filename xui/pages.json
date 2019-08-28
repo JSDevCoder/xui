@@ -9,16 +9,22 @@
 					"subNVues": [{
 						"id": "navBar",
 						"path": "/components/nvue/nav-bar.nvue",
-						"type": "navigationBar",
-						"style": {
-							
-						}
+						"type": "navigationBar"
 					}, {
 						"id": "pop",
 						"path": "/components/nvue/side-bar.nvue",
 						"type": "popup",
 						"style": {
 							"zindex": 9999
+						}
+					}, {
+						"id": "loading",
+						"type": "popup",
+						"path": "/components/nvue/loading",
+						"style": {
+							"width": "80px",
+							"height": "80px",
+							"margin": "auto"
 						}
 					}],
 					// #endif
