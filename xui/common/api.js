@@ -4,6 +4,6 @@
  * @email hexinshi@ebring.com.cn
  */
 export default {
-		// 测试api
-		test: '/users/list'
+	// 用户登录
+	login: '/user/login'
 }

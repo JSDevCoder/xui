@@ -7,16 +7,14 @@ import request from './request.js'
 import api from './api.js'
 
 export default {
-	// api
-	api,
-	
 	// 状态处理
 	statusCodeHandle: request.statusHandle,
-
-	/**
-	 * 测试接口
-	 */
-	test(userName, pageNum, pageSize) {
-		return request.ajax(this.api.test);
-	},
+	
+	// 用户登录
+	login(mobile, password) {
+		return request.ajax(api.login, {
+			mobile,
+			password
+		});
+	}
 }

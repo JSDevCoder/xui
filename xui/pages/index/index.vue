@@ -1,5 +1,7 @@
 <template>
 	<view class="container">
+		
+		
 		<!-- #ifdef H5 -->
 		<!-- H5导航条 -->
 		<x-nav-bar back="返回" title="H5标题哟" :icons="icons" @tapIcon="tapIcon"></x-nav-bar>
@@ -68,18 +70,18 @@
 		},
 
 		onLoad() {
+			const token = uni.getStorageSync('token');
+			console.log(token)
+			if(!token){
+				uni.redirectTo({
+					url: '/pages/login/login'
+				});
+				return;
+			}
+			
 			// #ifdef APP-PLUS
 			this.createNavBar();
 			// #endif
-			
-			// service.test().then(res => {
-			// 	if(res.code === 1){
-			// 		
-			// 	}else{
-			// 		service.statusCodeHandle(res.code, res.msg);
-			// 	}
-			// });
-			
 		},
 		methods: {
 			// #ifdef H5

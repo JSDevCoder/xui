@@ -1,25 +1,30 @@
 <template>
-	<div class="nav-bar">
+	<div class="nav-bar" :style="{backgroundColor: bgColor}">
 		<div class="status-bar" :style="{height: getStatusBar}"></div>
 		<div class="bar">
-			<div class="icon-back">
-				<text class="ta-c c"></text>
+			<div class="icon-back" v-if="isBack">
+				<text class="ta-c" :style="{color: color}"></text>
 			</div>
 			<div class="title">
-				<text class="ta-c c">{{title}}</text> 
+				<text class="ta-c" :style="{color: color}">{{title}}</text> 
 			</div>
-			<div class="icon-right">
-				<text class="ta-c c"></text>
+			<div class="icon-right" v-if="icons.length">
+				<text class="ta-c" :style="{color: color}"></text>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	const globalEvent = weex.requireModule('globalEvent');
 	export default {
 		data() {
 			return {
-				title: ''
+				title: '',
+				isBack: false,
+				icons: [],
+				color: '#333',
+				bgColor: '#fff'
 			}
 		},
 		computed: {
@@ -29,19 +34,17 @@
 		},
 		
 		created() {
-			const globalEvent = weex.requireModule('globalEvent');
 			globalEvent.addEventListener('plusMessage', e => {
 				console.log(e.data)
 				this.title = e.data.title;
 			});
-			
 		}
 	}
 </script>
 
 <style>
 .nav-bar{
-	background-color: #cc0200;
+	box-shadow: 0 1wx 1wx #d8d8d8;
 }
 
 .bar{
@@ -61,10 +64,6 @@
 
 .icon-right{
 	width:60wx;
-}
-
-.c{
-	color: #fff;
 }
 
 .ta-c{

@@ -33,7 +33,23 @@
 				}
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/login/login",
+            "style" : {
+				"app-plus": {
+					// #ifdef APP-PLUS
+					"subNVues": [{
+						"id": "navBar__login",
+						"path": "/components/nvue/nav-bar.nvue",
+						"type": "navigationBar"
+					}],
+					// #endif
+					
+					"titleNView": false
+				}
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

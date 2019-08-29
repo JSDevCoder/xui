@@ -15,7 +15,7 @@ export default {
 	 */
 	getRequestURL() {
 		const dev = {
-			baseUrl: 'http://192.168.108.115:3000',
+			baseUrl: 'https://www.easy-mock.com/mock/5d677b0a09835a6fa2c1feb3/api',
 			resUrl: 'http://192.168.108.115/'
 		};
 		
