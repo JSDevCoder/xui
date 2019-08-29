@@ -2,6 +2,7 @@
 	<view class="container">
 		<!-- #ifdef H5 -->
 		<x-nav-bar title="用户登录"></x-nav-bar>
+		<x-loading ref="loading"></x-loading>
 		<!-- #endif -->
 		
 		<form @submit="submitForm" @reset="resetForm">
@@ -22,7 +23,10 @@
 </template>
 
 <script>
+	// #ifdef H5
 	import xNavBar from '../../components/ui/nav-bar.vue'
+	import xLoading from '../../components/ui/loading.vue'
+	// #endif
 	import tools from '../../common/tools.js'
 	import service from '../../common/service.js'
 	export default {
@@ -34,7 +38,11 @@
 		},
 		
 		components: {
-			xNavBar
+			// #ifdef H5
+			xNavBar,
+			xLoading
+			// #endif
+			
 		},
 
 		onLoad() {
@@ -51,6 +59,26 @@
 					title: '用户登录'
 				}, 'navBar__login')
 				navBar.show();
+			},
+			
+			createLoading() {
+				const loading = uni.getSubNVueById('loading');
+				loading.show();
+			},
+			
+			removeLoading() {
+				const loading = uni.getSubNVueById('loading');
+				loading.hide();
+			},
+			// #endif
+			
+			// #ifdef H5
+			createLoading__H5() {
+				this.$refs.loading.open();
+			},
+			
+			removeLoading__H5(){
+				this.$refs.loading.close();
 			},
 			// #endif
 			
@@ -93,8 +121,19 @@
 			submitForm(e) {
 				const data = e.detail.value;
 				if(!this.verifyForm(data)) return;
-				
+				// #ifdef APP-PLUS
+				this.createLoading();
+				// #endif
+				// #ifdef H5
+				this.createLoading__H5();
+				// #endif
 				service.login(data.mobile, data.password).then(res => {
+					// #ifdef APP-PLUS
+					this.removeLoading();
+					// #endif
+					// #ifdef H5
+					this.removeLoading__H5();
+					// #endif
 					if(res.code === 1){
 						const token = res.data.token;
 						uni.setStorageSync('token', token);

@@ -79,7 +79,6 @@ export default {
 		} = {}
 	) {
 		if(!api) throw new Error('ajax请求缺少参数\'api\'');
-		uni.showLoading({title: 'loading...'});
 		const options = {
 			url: this.getApi(api),
 			data: this.getData(data),
@@ -90,7 +89,6 @@ export default {
 		}
 		try{
 			const [error, res]  = await uni.request(options);
-			uni.hideLoading();
 			if(error && error.errMsg === 'request:fail timeout'){
 				this.log(options.url, options.data, error);
 				uni.showToast({

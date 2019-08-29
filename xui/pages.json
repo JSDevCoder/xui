@@ -42,6 +42,15 @@
 						"id": "navBar__login",
 						"path": "/components/nvue/nav-bar.nvue",
 						"type": "navigationBar"
+					}, {
+						"id": "loading",
+						"type": "popup",
+						"path": "/components/nvue/loading",
+						"style": {
+							"width": "80px",
+							"height": "80px",
+							"margin": "auto"
+						}
 					}],
 					// #endif
 					
