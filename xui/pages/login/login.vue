@@ -1,21 +1,28 @@
 <template>
 	<view class="container">
-		<form class="form" @submit="submitForm" @reset="resetForm">
-			<view class="form-item">
-				<view class="form-item-label">手机号</view>
-				<input class="form-item-input" type="number" name="mobile" v-model="mobile" placeholder="请输入手机号" />
+		<!-- #ifdef H5 -->
+		<x-nav-bar title="用户登录"></x-nav-bar>
+		<!-- #endif -->
+		
+		<form @submit="submitForm" @reset="resetForm">
+			<view class="form">
+				<view class="form-item">
+					<view class="form-item-label">手机号</view>
+					<input class="form-item-input" type="number" name="mobile" v-model="mobile" placeholder="请输入手机号" />
+				</view>
+				<view class="form-item">
+					<view class="form-item-label">密码</view>
+					<input class="form-item-input" type="text" password="true" name="password" v-model="password" placeholder="请输入手机号" />
+				</view>
+				
+				<button class="submit" form-type="submit">登录</button>
 			</view>
-			<view class="form-item">
-				<view class="form-item-label">密码</view>
-				<input class="form-item-input" type="text" password="true" name="password" v-model="password" placeholder="请输入手机号" />
-			</view>
-			
-			<button class="submit" form-type="submit">登录</button>
 		</form>
 	</view>
 </template>
 
 <script>
+	import xNavBar from '../../components/ui/nav-bar.vue'
 	import tools from '../../common/tools.js'
 	import service from '../../common/service.js'
 	export default {
@@ -24,6 +31,10 @@
 				mobile: '15291985843',
 				password: '123456'
 			};
+		},
+		
+		components: {
+			xNavBar
 		},
 
 		onLoad() {
@@ -109,7 +120,7 @@
 </script>
 
 <style lang="less" scoped>
-	.container{
+	.form{
 		padding: 20px;
 		
 		.form-item{

@@ -1,7 +1,7 @@
 <template>
 	<!-- 顶部导航 -->
 	<view class="wrap">
-		<view class="nav-bar">
+		<view class="nav-bar" :style="{backgroundColor: bgColor, color: color}">
 			<view class="back" :class="backIcon ? backIcon : ''" @tap="toBack">{{back ? back : ''}}</view>
 			<view class="title">{{title}}</view>
 			<view class="icons">
@@ -36,6 +36,16 @@
 				default() {
 					return [];
 				}
+			},
+			
+			bgColor: {
+				type: String,
+				default: '#fff'
+			},
+			
+			color: {
+				type: String,
+				default: '#333'
 			}
 		},
 		
@@ -71,8 +81,7 @@
 			top:0;
 			z-index: 998;
 			height:44px;
-			background-color: #cc0200;
-			color:#fff;
+			box-shadow: 0 1px 1px #d8d8d8;
 			
 			.back, .icons{
 				min-width:44px;
