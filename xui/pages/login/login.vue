@@ -152,7 +152,6 @@
 						service.statusCodeHandle(res.code, res.msg);
 					}
 				});
-				
 			},
 		}
 	}

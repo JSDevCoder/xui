@@ -27,6 +27,12 @@
 		
 		<x-loading ref="vueLoading"></x-loading>
 		
+		<x-tab pane-key="key1">
+			<x-tab-pane label="项目一" name="key1">这是项目一的内容</x-tab-pane>
+			<x-tab-pane label="项目er" name="key2">这是项目er的内容</x-tab-pane>
+			<x-tab-pane label="项san" name="key3">这是项目san的内容</x-tab-pane>
+		</x-tab>
+		
 		<view class="btns">
 			<button type="primary" @tap="openSideBar">点击打开侧栏</button>
 			<button class="mt" type="default" @tap="openBottomPopover">点击打开底部弹窗</button>
@@ -44,6 +50,8 @@
 	import xSideBar from '../../components/ui/side-bar.vue'
 	import xBottomPopover from '../../components/ui/bottom-popover.vue'
 	import xLoading from '../../components/ui/loading.vue'
+	import xTab from '../../components/ui/tab/tab.vue'
+	import xTabPane from '../../components/ui/tab/tab-pane.vue'
 	// #ifdef H5
 	import xNavBar from '../../components/ui/nav-bar.vue'
 	// #endif
@@ -64,6 +72,8 @@
 			xSideBar,
 			xBottomPopover,
 			xLoading,
+			xTab,
+			xTabPane,
 			// #ifdef H5
 			xNavBar
 			// #endif
@@ -74,7 +84,9 @@
 			console.log(token)
 			if(!token){
 				uni.redirectTo({
-					url: '/pages/login/login'
+					url: '/pages/login/login',
+					animationType: 'slide-in-bottom',
+					animationDuration: '800'
 				});
 				return;
 			}
@@ -104,7 +116,7 @@
 				const navBar = uni.getSubNVueById('navBar');
 				
 				plus.webview.postMessageToUniNView({
-					title: '测试一下哟'
+					title: '首页'
 				}, 'navBar')
 				
 				navBar.show();
