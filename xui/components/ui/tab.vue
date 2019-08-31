@@ -2,7 +2,7 @@
 	<view class="tab">
 		<view class="tab-head">
 			<!-- <view class="b-r"></view> -->
-			<view class="tab-head-item single-line-hidden" v-for="(item, index) of itemData" :key="index" :data-index="index" @tap="itemTap">
+			<view class="tab-head-item single-line-hidden" :style="{width: (100 / itemData.length * 100) + '%'}" v-for="(item, index) of itemData" :key="index" :data-index="index" @tap="itemTap">
 				<text :class="idx == index ? 'c' : ''">{{item.title}}</text>
 				<view class="b-b" v-if="idx == index"></view>
 			</view>
