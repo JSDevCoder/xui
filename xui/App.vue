@@ -16,4 +16,10 @@
 	page{
 		font-size: 14px;
 	}
+	
+	.single-line-hidden{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 </style>
