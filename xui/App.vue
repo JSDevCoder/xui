@@ -19,6 +19,11 @@
 		},
 		onLaunch: function() {
 			console.log('App Launch')
+			var domModule = weex.requireModule("dom");
+			domModule.addRule('fontFace', {
+				"fontFamily": "iconfontExam",
+				"src": "url('https://at.alicdn.com/t/font_1165569_2djuy6bsjwx.ttf')"
+			});
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -39,13 +44,19 @@
 	 * 5.类名为小写字母，如有需要，则以`-`分隔
 	 */
 	
-	page{
-		font-size: 14px;
-	}
-	
 	.single-line-hidden{
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+	
+	.iconfont-exam{
+		font-family: iconfontExam;
+		font-size: 14px;
+		font-style: normal;
+	}
+	
+	.container{
+		font-size: 14px;
 	}
 </style>

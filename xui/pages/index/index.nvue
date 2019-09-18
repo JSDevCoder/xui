@@ -1,12 +1,13 @@
 <template>
 	<view class="container">
-
+		<navbar :is-back="true" back-text="返回" title="资讯" :icons="[{text: '按钮'}]"></navbar>
 	</view>
 </template>
 
 <script>
 	import service from '../../common/service.js'
-
+	import zip from '../../common/zip/zipImg.js'
+	import navbar from '../../components/navbar/Navbar.nvue'
 	export default {
 		data() {
 			return {
@@ -15,26 +16,39 @@
 		},
 
 		components: {
-
+			navbar
 		},
 
 		onLoad() {
-			const token = uni.getStorageSync('token');
-			if (!token) {
-				uni.redirectTo({
-					url: '/pages/login/login',
-					animationType: 'slide-in-bottom',
-					animationDuration: '800'
-				});
-				return;
-			}
+			// zip.chooseImage();
+			var player = plus.video.createVideoPlayer('player', {
+				src: 'https://ip3545375349.mobgslb.tbcache.com/677384DEFF24D71F95B495AB8/03000814005D7F26AE6464805CF07D8AC0A0FA-44F0-4198-95F3-D47735827972.mp4?ccode=0501&duration=390&expire=18000&psid=e94d0bfa911350256ab5312f96a62c0c&ups_client_netip=01550062&ups_ts=1568797074&ups_userid=&utid=jLvvFR70mWYCAQFVAGKkqSYG&vid=XNDM1Nzg4NDA1Mg%3D%3D&vkey=Afd84d13e47d4e5fc3c7f442ee93a53c5&s=07b8722657364fa2a485&sp=400&bc=2&ali_redirect_domain=vali-dns.cp31.ott.cibntv.net&ali_redirect_ex_ftag=4cff44e218503ad38de780c33523d5c8b1512c0a14dcddce&ali_redirect_ex_tmining_ts=1568797076&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=100',
+				top: uni.getSystemInfoSync().statusBarHeight + 44 + 'px',
+				left: '0px',
+				width: '100%',
+				height: '200px',
+				position: 'absolute',
+				controls: true,
+				objectFit: 'fill'
+			});
+			plus.webview.currentWebview().append(player);
+
+			// const token = uni.getStorageSync('token');
+			// if (!token) {
+			// 	uni.redirectTo({
+			// 		url: '/pages/login/login',
+			// 		animationType: 'slide-in-bottom',
+			// 		animationDuration: '800'
+			// 	});
+			// 	return;
+			// }
 		},
 		methods: {
-			
+
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-	
+
 </style>

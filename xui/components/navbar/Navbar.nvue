@@ -1,0 +1,149 @@
+<template>
+	<div class="navbar" :style="{height: (44 + statusBarHeight) + 'px'}">
+		<div class="status-bar" :style="{height: statusBarHeight + 'px'}"></div>
+		<div class="info">
+			<div class="back flex" v-if="isBack" @click="back">
+				<text class="fs iconfont-exam">{{backIcon}}</text>
+				<text class="fs ml" v-if="backText">{{backText}}</text>
+			</div>
+			<div class="title">
+				<text class="title-text" v-if="title">{{title}}</text>
+				<slot></slot>
+			</div>
+			<div class="icons flex" v-if="icons.length">
+				<div class="item ml" v-for="(item, index) of icons" :key="index" @click="menuClick(index)">
+					<text class="item-icon" :class="item.icon" v-if="item.icon">{{item.icon}}</text>
+					<text class="item-text" v-if="item.text">{{item.text}}</text>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		
+		props: {
+			// 标题
+			title: {
+				type: String,
+				default: '自定义标题'
+			},
+			
+			// back内容，isBack为true时生效
+			isBack: {
+				type: Boolean,
+				default: false
+			},
+			
+			// 返回按钮图标
+			backIcon: {
+				type: String,
+				default: '\ue602'
+			},
+			
+			// 返回按钮文字
+			backText: {
+				type: String,
+				default: '返回'
+			},
+			
+			// 按钮组
+			icons: {
+				type: Array,
+				default() {
+					return []
+				}
+			}
+		},
+		
+		computed: {
+			statusBarHeight() {
+				return uni.getSystemInfoSync().statusBarHeight;
+			}
+		},
+		
+		methods: {
+			/**
+			 * 返回操作
+			 */
+			back() {
+				uni.navigateBack({
+					delta: 1
+				});
+			},
+			
+			/**
+			 * 按钮点击操作
+			 * @param {Object} index 当前点击第几个按钮
+			 */
+			menuClick(index) {
+				console.log(index)
+				this.$emit('menuClick', index);
+			}
+		}
+	}
+</script>
+
+<style lang="less" scoped>
+.navbar{
+	background-color: #cc0200;
+}
+.info{
+	height:44px;
+	position: relative;
+}
+.back, .icons{
+	position: absolute;
+	top: 0;
+	z-index: 9;
+}
+.back{
+	height:44px;
+	left: 10px;
+}
+.fs{
+	font-size: 14px;
+	color: #fff;
+}
+.ml{
+	margin-left: 10px;
+}
+.title{
+	height:44px;
+}
+.title-text{
+	text-align:center;
+	line-height:44px;
+	font-size: 16px;
+	color: #fff;
+}
+.icons{
+	right: 10px;
+}
+.item{
+	align-items: center;
+	justify-content: center;
+	height:44px;
+}
+.item-icon, .item-text{
+	text-align:center;
+	color:#fff;
+	font-size: 14px;
+}
+.flex{
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.icons-text{
+	font-size: 14px;
+	color: #fff;
+}
+
+</style>
