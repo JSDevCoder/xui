@@ -11,9 +11,7 @@
 			"path": "pages/login/login",
 			"style": {
 				"app-plus": {
-					"titleNView": {
-						"titleText": "我的"
-					}
+					"titleNView": false
 				}
 			}
 		}

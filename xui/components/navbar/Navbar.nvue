@@ -1,6 +1,6 @@
 <template>
 	<div class="navbar" :style="{height: (44 + statusBarHeight) + 'px'}">
-		<div class="status-bar" :style="{height: statusBarHeight + 'px'}"></div>
+		<Statusbar></Statusbar>
 		<div class="info">
 			<div class="back flex" v-if="isBack" @click="back">
 				<text class="fs iconfont-exam">{{backIcon}}</text>
@@ -21,11 +21,10 @@
 </template>
 
 <script>
+	import Statusbar from './Statusbar.nvue'
 	export default {
-		data() {
-			return {
-				
-			};
+		components: {
+			Statusbar
 		},
 		
 		props: {
@@ -62,11 +61,7 @@
 			}
 		},
 		
-		computed: {
-			statusBarHeight() {
-				return uni.getSystemInfoSync().statusBarHeight;
-			}
-		},
+		
 		
 		methods: {
 			/**

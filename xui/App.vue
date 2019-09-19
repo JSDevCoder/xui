@@ -19,7 +19,8 @@
 		},
 		onLaunch: function() {
 			console.log('App Launch')
-			var domModule = weex.requireModule("dom");
+			// nvue内使用iconfont字体的使用方式
+			const domModule = weex.requireModule("dom");
 			domModule.addRule('fontFace', {
 				"fontFamily": "iconfontExam",
 				"src": "url('https://at.alicdn.com/t/font_1165569_2djuy6bsjwx.ttf')"
@@ -42,13 +43,8 @@
 	 * 3.尽量使用缩写属性
 	 * 4.0后面不带单位
 	 * 5.类名为小写字母，如有需要，则以`-`分隔
+	 * 6.nvue模式下，css单位为rpx和px，rpx为动态单位，px为静态单位
 	 */
-	
-	.single-line-hidden{
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
 	
 	.iconfont-exam{
 		font-family: iconfontExam;

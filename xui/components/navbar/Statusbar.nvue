@@ -1,0 +1,20 @@
+<template>
+	<div :style="{height: statusBarHeight + 'px', backgroundColor: bgColor}"></div>
+</template>
+
+<script>
+	export default {
+		computed: {
+			statusBarHeight() {
+				return uni.getSystemInfoSync().statusBarHeight;
+			}
+		},
+		
+		props: {
+			bgColor: {
+				type: String,
+				default: ''
+			}
+		}
+	}
+</script>
