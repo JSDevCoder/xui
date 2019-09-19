@@ -1,0 +1,93 @@
+<template>
+	<div class="loading" v-if="isShow" @click="closeLoading">
+		<div class="info" :style="{top: windowHeight / 2 + 'px'}">
+			<image ref="img" class="img" src="../../static/logo.png"></image>
+			<!-- <text class="text">loading</text> -->
+		</div>
+	</div>
+</template>
+
+<script>
+	const animation = weex.requireModule("animation");
+	export default {
+		data() {
+			return {
+				currentRotate: 0,
+				timer: null,
+				isShow: false
+			};
+		},
+
+		computed: {
+			windowHeight() {
+				return uni.getSystemInfoSync().windowHeight;
+			}
+		},
+		
+		methods: {
+			loadingRotate() {
+				this.currentRotate += 90;
+				const img = this.$refs.img;
+				animation.transition(
+					img, 
+					{
+						styles: {
+							transform: 'rotate(' + this.currentRotate + 'deg)',
+						},
+						duration: 400, //ms
+						timingFunction: 'ease',
+						needLayout: false,
+						delay: 0 //ms
+					}, 
+					() => {}
+				)
+			},
+			
+			openLoading() {
+				this.isShow = true;
+				this.timer = setInterval(() => {
+					this.loadingRotate();
+				}, 1000)
+			},
+			
+			closeLoading() {
+				this.isShow = false;
+				this.currentRotate = 0;
+				clearInterval(this.timer);
+			}
+		}
+	}
+</script>
+
+<style>
+	.loading {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 6;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+	.info {
+		position: fixed;
+		left: 315rpx;
+		z-index: 10;
+		width: 120rpx;
+		height: 120rpx;
+		background-color: #fff;
+		border-radius: 10px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.img {
+		width: 30px;
+		height: 30px;
+	}
+
+	.text {
+		font-size: 12px;
+	}
+</style>

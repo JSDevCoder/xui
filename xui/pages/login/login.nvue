@@ -1,5 +1,6 @@
 <template>
 	<view class="container">
+		<Statusbar bg-color="rgba(0, 0, 0, .4)"></Statusbar>
 		<form @submit="submitForm" @reset="resetForm">
 			<view class="form">
 				<view class="form-item">
@@ -20,6 +21,7 @@
 <script>
 	import tools from '../../common/tools.js'
 	import service from '../../common/service.js'
+	import Statusbar from '../../components/navbar/Statusbar.nvue'
 	export default {
 		data() {
 			return {
@@ -29,7 +31,7 @@
 		},
 		
 		components: {
-			
+			Statusbar
 		},
 
 		onLoad() {
